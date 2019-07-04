@@ -71,4 +71,4 @@ _Funciones del sistema:_
 	*calendarios de actividades
 	*responsive
 
-Make with ❤️ :heart: by Jozaguts.
+Make with :heart: by Jozaguts.
