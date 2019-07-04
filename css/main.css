@@ -1,0 +1,20 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    box-sizing: border-box;
+}
+/* Paleta de colores */
+:root{
+    --dark-primary-color : #303F9F;
+    --default-primary-color:#3F51B5;
+    --light-primary-color:#C5CAE9;
+    --text-primary-color: #FFFFFF; 
+    --accent-color:#448AFF;
+    --primary-text-color:#212121;
+    --secondary-text-color :#757575;
+    --divider-color :#BDBDBD; 
+} 
+.main{
+    background-color: var(--default-primary-color)
+}
