@@ -3,7 +3,7 @@ _Gestionar y controlar las actividades y miembros de un trabajo colaborativo
 asignados por un profesor, donde se pueda monitorizar en tiempo real el avance de 
 las actividades, entregas y calificaciones_
 
-~~ESPECIFICACIONES:~~
+_ESPECIFICACIONES:_
 
 - Debe ser un sistema web
 - Utilizar PHP, Javascript [Jquery], HTML y CSS
@@ -15,9 +15,9 @@ las actividades, entregas y calificaciones_
 	*Codigo limpio
 	*Scripts agrupados y ordenados
 
-~~Funciones del sistema:~~
+_Funciones del sistema:_
 
-* - Registrar equipos de trabajo y sus miembros
+*  Registrar equipos de trabajo y sus miembros
 
 	*codigo de equipo
 	*nombre del equipo
@@ -26,18 +26,18 @@ las actividades, entregas y calificaciones_
 	*lider de equipo
 	*//cantidad de miembros
 
-* - Registro de Proyecto
+*  _Registro de Proyecto_
 	*nombre del proyecto
 	*actividades a realizar
 	*Descripción del proyecto
 	*archivo final a entregar
 
-* - Definir 3 niveles de acceso:
+*  _Definir 3 niveles de acceso:_
 	*Maestro
 	*Lider de equipo
 	*Miembro de equipo
 
-* - Cualidades de usuario maestro
+*  _Cualidades de usuario maestro_
 	*dar de alta alumnos
 	*dar de alta proyectos
 	*asignar alumnos a proyectos: manual 
@@ -47,7 +47,7 @@ las actividades, entregas y calificaciones_
 	*supervisar avance y evidencia del proyecto
 	*descargar resultados de proyecto
 
-* - Cualidades del lider de equipo
+*  _Cualidades del lider de equipo_
 	*asignar actividades a los miembros
 	*enviar mensaje a profesor
 	*enviar mensaje a miembros del equipo
@@ -56,12 +56,12 @@ las actividades, entregas y calificaciones_
 	*comentar actividades de proyecto
 	*definir que una actividad fue terminada con exito o no
 
-* - cualidades de miembros de equipo
+*  _Cualidades de miembros de equipo_
 	*enviar mensaje a lider de equipo
 	*subir evidencia de actividades realizadas
 	*comentar actividades realizadas
 
-* - ~~aspectos deseables~~
+*   _Aspectos deseables _
 	*notificaciones por correo
 	*actializacion en tiempo real de avance
 	*uso de AJAX
@@ -71,5 +71,4 @@ las actividades, entregas y calificaciones_
 	*calendarios de actividades
 	*responsive
 
-
-by Jozaguts.
+Make with ![alt text](https://github.githubassets.com/images/icons/emoji/unicode/2764.png) by Jozaguts.
