@@ -71,4 +71,4 @@ _Funciones del sistema:_
 	*calendarios de actividades
 	*responsive
 
-Make with ![alt text](https://github.githubassets.com/images/icons/emoji/unicode/2764.png) by Jozaguts.
+Make with ❤️ :heart: by Jozaguts.
