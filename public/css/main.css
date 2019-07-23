@@ -1,0 +1,317 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    font-family: "Roboto";
+}
+@font-face{
+    font-family: "Roboto";
+    src: url("../fonts/Roboto-Regular.ttf");
+}
+:root{
+    --dark-primary-color : #303F9F;
+    --default-primary-color:#3F51B5;
+    --light-primary-color:#C5CAE9;
+    --text-icons-color: #FFFFFF; 
+    --accent-color:#448AFF;
+    --primary-text-color:#212121;
+    --secondary-text-color :#757575;
+    --divider-color :#BDBDBD; 
+} 
+body{
+    background-color:  var(--default-primary-color );
+}
+/* iphone 6 7 y 8 */
+@media only screen 
+  and (min-device-width: 360px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2) { 
+      
+header{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    width: 100vw;
+    text-align: center;
+    margin-top: 32px;
+}
+h1{
+    color: black;
+    font-size: 25px;
+    margin-bottom: 1rem;
+    
+
+}
+h2{
+    color: var(--secondary-text-color);
+    font-size: 13px;
+    font-weight: normal;
+   
+}
+.logo-container{
+    width: 113px;
+    height: 113px;
+    background-color: var(--accent-color);
+    display: block;
+    border-radius: 50%;
+    margin: 0 auto;
+    position: relative;
+    top: 10vh;
+}
+.logo-container::after{
+    content: "";
+    width: 60px;
+    height: 60px;
+    /* background-color: red; */
+   display: block;
+    position: absolute;
+    background-image: url('../img/icons/user-icon.svg');
+    background-size: cover;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto auto;
+}
+.brand{
+    display: block;
+    margin: 20% auto 0 auto;
+    text-align: center;
+    font-size: 30px;
+    color: var(--primary-text-color);
+}
+.btn-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    width: 90vw;
+    margin: auto auto;
+    padding-top: 2rem;
+}
+.btn-container > span{
+    text-align: center;
+    margin-bottom: 10%;
+    color: var(--secondary-text-color);
+}
+.btn{
+    height: 50px;
+    border: none;
+    margin-bottom: 2rem;
+    border-radius: 5px;
+}
+.btn:hover, .btn:active{
+    cursor: pointer;
+}
+.btn-maestro{
+    background-color: var(--accent-color);
+    color: var(--text-icons-color);
+}
+.btn-lider{
+    background-color: var(--dark-primary-color);
+    color: var(--text-icons-color);
+}
+.btn-miembro{
+    background-color: var(--light-primary-color);
+    color: var(--primary-text-color);
+}
+
+}
+
+/* iphone 5/SE */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 359px) 
+  and (-webkit-min-device-pixel-ratio: 2) { 
+      
+header{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    width: 100vw;
+    text-align: center;
+    margin-top: 1rem;
+}
+h1{
+    color: black;
+    font-size: 25px;
+    margin-bottom: 1rem;
+    
+
+}
+h2{
+    color: var(--secondary-text-color);
+    font-size: 13px;
+    font-weight: normal;
+   
+}
+.logo-container{
+    width: 113px;
+    height: 113px;
+    background-color: var(--accent-color);
+    display: block;
+    border-radius: 50%;
+    margin: 0 auto;
+    position: relative;
+    top: 8vh;
+}
+.logo-container::after{
+    content: "";
+    width: 60px;
+    height: 60px;
+    /* background-color: red; */
+   display: block;
+    position: absolute;
+    background-image: url('../img/icons/user-icon.svg');
+    background-size: cover;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto auto;
+}
+.brand{
+    display: block;
+    margin: 16% auto 0 auto;
+    text-align: center;
+    font-size: 30px;
+    color: var(--primary-text-color);
+}
+.btn-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    width: 90vw;
+    margin: auto auto;
+    padding-top: 1rem;
+}
+.btn-container > span{
+    text-align: center;
+    margin-bottom: 10%;
+    color: var(--secondary-text-color);
+}
+.btn{
+    height: 50px;
+    border: none;
+    margin-bottom: 2rem;
+    border-radius: 5px;
+}
+.btn:hover, .btn:active{
+    cursor: pointer;
+}
+.btn-maestro{
+    background-color: var(--accent-color);
+    color: var(--text-icons-color);
+}
+.btn-lider{
+    background-color: var(--dark-primary-color);
+    color: var(--text-icons-color);
+}
+.btn-miembro{
+    background-color: var(--light-primary-color);
+    color: var(--primary-text-color);
+}
+
+}
+
+/* iphone 6 7 8 plus */
+@media only screen 
+  and (min-device-width: 411px) 
+  and (max-device-width: 600px) 
+  and (-webkit-min-device-pixel-ratio: 2) { 
+      
+header{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    width: 100vw;
+    text-align: center;
+    margin-top: 3rem;
+}
+h1{
+    color: black;
+    font-size: 25px;
+    margin-bottom: 1rem;
+    
+
+}
+h2{
+    color: var(--secondary-text-color);
+    font-size: 13px;
+    font-weight: normal;
+   
+}
+.logo-container{
+    width: 113px;
+    height: 113px;
+    background-color: var(--accent-color);
+    display: block;
+    border-radius: 50%;
+    margin: 0 auto;
+    position: relative;
+    top: 12vh;
+}
+.logo-container::after{
+    content: "";
+    width: 60px;
+    height: 60px;
+    /* background-color: red; */
+   display: block;
+    position: absolute;
+    background-image: url('../img/icons/user-icon.svg');
+    background-size: cover;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto auto;
+}
+.brand{
+    display: block;
+    margin: 25% auto 0 auto;
+    text-align: center;
+    font-size: 30px;
+    color: var(--primary-text-color);
+}
+.btn-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    width: 90vw;
+    margin: auto auto;
+    padding-top: 3rem;
+}
+.btn-container > span{
+    text-align: center;
+    margin-bottom: 12%;
+    color: var(--secondary-text-color);
+}
+.btn{
+    height: 50px;
+    border: none;
+    margin-bottom: 2rem;
+    border-radius: 5px;
+}
+.btn:hover, .btn:active{
+    cursor: pointer;
+}
+.btn-maestro{
+    background-color: var(--accent-color);
+    color: var(--text-icons-color);
+}
+.btn-lider{
+    background-color: var(--dark-primary-color);
+    color: var(--text-icons-color);
+}
+.btn-miembro{
+    background-color: var(--light-primary-color);
+    color: var(--primary-text-color);
+}
+
+}
