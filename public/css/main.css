@@ -5,21 +5,22 @@
     list-style: none;
     font-family: "Roboto";
 }
+
 .animated {
     -webkit-animation-duration: 1s;
     animation-duration: 1s;
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
-  }
+}
   
-  .fast {
+.fast {
     -webkit-animation-duration: 0.4s;
     animation-duration: 0.4s;
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
-  }
+}
   
-  @keyframes fadeIn {
+@keyframes fadeIn {
     from {
       opacity: 0;
     }
@@ -29,9 +30,9 @@
     }
   }
   
-  .fadeIn {
+.fadeIn{
     animation-name: fadeIn;
-  }
+}
 
   
 @font-face{
@@ -65,6 +66,15 @@ header{
     width: 100vw;
     text-align: center;
     margin-top: 32px;
+}
+footer{
+    position: absolute;
+    bottom: 0;
+    padding: 1rem;
+    right: 0;
+    left:0;
+    margin: auto auto;
+    text-align: center;
 }
 h1{
     color: black;
@@ -214,8 +224,102 @@ justify-content: space-between;
     height: 3.5rem;
     background-color: var(--light-primary-color);
 }
-}
 
+
+/* login maestro */
+
+.small-title{
+    display: block;
+    font-size: 13px;
+    color: var(--secondary-text-color);
+    
+}
+.icon-row-left{
+width: 16px;
+height: 16px;
+background-image: url("../img/icons/row-left.png");
+display: block;
+background-position: 50% 50%;
+background-size: cover;
+color: var(--primary-text-color);
+margin-left: 1rem;
+}
+.login-main{
+    padding-top: 5vh;
+}
+.login-logo-container{
+    display: flex;
+    flex-direction: column;
+    margin: auto auto;
+    width: 30vw;
+    justify-content: center;
+    align-items: center;
+    
+}
+.login-logo-container__logo{
+    background-image: url("../img/icons/login-icon.png");
+    background-size: 60px 60px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    display: block;
+    width: 113px;
+    height: 113px;
+    padding: 4rem;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    margin-bottom: 5vh;
+}
+.login-logo-container__title{
+    text-align: center;
+    width: max-content;
+}
+.logo-footer-title{
+    font-weight: 500;
+    font-size: 1.9rem;
+    color: var(--primary-text-color);
+    margin-bottom: .5rem;
+}
+.logo-footer-sub-title{
+    color: var(--secondary-text-color);
+    font-size: 18px;
+}
+.login-form-container{
+    margin-top: 3vh;
+    height: max-content;
+}
+.login-form-container > form{
+text-align: center;
+display: flex;
+justify-content: space-between;
+flex-direction: column;
+
+}
+.login-form-container > form > input{
+    display: block;
+    width: 80vw;
+    height: 50px;
+    background: none;
+    border: 1px solid var(--accent-color);
+    margin: 1rem auto;
+    color: var(--text-icons-color);
+    padding-left: 20px;
+}
+.login-form-container > form > input::placeholder{
+   color: var(--text-icons-color);
+   padding-left: 20px;
+   letter-spacing: 1px;
+}
+.login-form-container > form > button{
+    display: block;
+    width: 80vw;
+    height: 50px;
+    background-color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    margin: 1rem auto;
+    border-radius: 20px;
+    color: var(--text-icons-color)
+}
+}
 /* iphone 5/SE */
 @media only screen 
   and (min-device-width: 320px) 
@@ -258,7 +362,6 @@ h2{
     content: "";
     width: 60px;
     height: 60px;
-    /* background-color: red; */
    display: block;
     position: absolute;
     background-image: url('../img/icons/user-icon.svg');
@@ -329,6 +432,11 @@ header{
     text-align: center;
     margin-top: 3rem;
 }
+footer{
+    position: absolute;
+    bottom: 0;
+    padding: 1rem;
+}
 h1{
     color: black;
     font-size: 25px;
@@ -356,7 +464,7 @@ h2{
     content: "";
     width: 60px;
     height: 60px;
-    /* background-color: red; */
+
    display: block;
     position: absolute;
     background-image: url('../img/icons/user-icon.svg');
@@ -472,7 +580,7 @@ h2{
     }
     .btn-container{
         display: flex;
-        /* flex-direction: column; */
+  
         justify-content: space-between;
         align-content: center;
         width: 90vw;
@@ -517,5 +625,5 @@ h2{
     .btn-miembro{
         background-color: var(--light-primary-color);
         color: var(--primary-text-color);
-
+}
 }
