@@ -5,9 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="public/css/main.css">
-    <title>Document</title>
+    <title>SiGTE</title>
 </head>
 <body>
+
+
+    
 
     <div class="container">
         <!-- Encabezado y subtitulo -->
@@ -24,6 +27,27 @@
         <span class="brand">
             SiGTE
         </span>
+        <?php
+        session_start();
+        // var_dump($_SESSION);
+        if(isset($_SESSION['user_type_id']))
+        {
+            $idSession = $_SESSION['user_type_id'];
+            var_dump( $idSession);
+        ?> 
+             <input type="hidden" name="session" data-session="<?=$idSession?>">
+        <?php
+        }
+    
+        else{
+            $idSession=100;
+        ?> 
+             <input type="hidden" name="session" data-session="<?= $idSession ?>">
+        <?php
+        }
+        ?>
+        
+
         <!-- fin de la marca -->
         <!-- botones de login -->
 

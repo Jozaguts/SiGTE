@@ -1,0 +1,22 @@
+<svg id="profile" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="375" height="80" viewBox="0 0 375 80">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="16" height="16" fill="none"/>
+    </clipPath>
+  </defs>
+  <rect id="Rectángulo_582" data-name="Rectángulo 582" width="375" height="80" fill="#303f9f"/>
+  <g id="Name" transform="translate(80 25)">
+    <text id="Gillermo" transform="translate(0 13)" fill="#212121" font-size="14" font-family="Arial-BoldMT, Arial" font-weight="700"><tspan x="0" y="0">Gillermo</tspan></text>
+    <text id="Quiñones_Villareal" data-name="Quiñones Villareal" transform="translate(0 29)" fill="#757575" font-size="10" font-family="ArialMT, Arial"><tspan x="0" y="0">Quiñones Villareal</tspan></text>
+  </g>
+  <g id="Grupo_28" data-name="Grupo 28" transform="translate(16 16)">
+    <path id="Trazado_153" data-name="Trazado 153" d="M24,0A24,24,0,1,1,0,24,24,24,0,0,1,24,0Z" fill="#fff"/>
+    <g id="Símbolo_6_9" data-name="Símbolo 6 – 9" transform="translate(16 16)" clip-path="url(#clip-path)">
+      <path id="Unión_1" data-name="Unión 1" d="M0,16V14c0-2.2,3.6-4,8-4s8,1.8,8,4v2ZM4,4A4,4,0,1,1,8,8,4,4,0,0,1,4,4Z" fill="#448aff"/>
+    </g>
+  </g>
+  <g id="Logout" transform="translate(343 32)" clip-path="url(#clip-path)">
+    <rect id="Rectángulo_570" data-name="Rectángulo 570" width="16" height="16" fill="none"/>
+    <path id="Trazado_151" data-name="Trazado 151" d="M1.655,1.655v12.69H9.563V16H0V0H9.563V1.655ZM9.011,13.241,7.724,11.954l2.943-2.943h-6.8V7.172h6.989L7.724,4.23,9.011,2.943l4.966,4.966Z" transform="translate(2)" fill="#fff"/>
+  </g>
+</svg>
