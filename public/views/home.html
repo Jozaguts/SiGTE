@@ -1,4 +1,7 @@
+
+
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,6 +11,9 @@
     <title>Document</title>
 </head>
 <body>
+
+
+    
 
     <div class="container">
         <!-- Encabezado y subtitulo -->
@@ -23,7 +29,13 @@
         <!-- nombre de la marca -->
         <span class="brand">
             SiGTE
+            <?php
+    session_start();
+    $idSession = $_SESSION['user_type_id'];
+    echo '<input type="hidden" name="session" data-session="'.$idSession.'">'
+?>
         </span>
+        
         <!-- fin de la marca -->
         <!-- botones de login -->
 

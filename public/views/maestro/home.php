@@ -1,30 +1,33 @@
 <?php namespace Maestro;
+// requiero el auto cargador de clases
+require ('../autoload.php');
+session_start();
+$user_type = $_SESSION['user_type_id'];
+
+// var_dump($user_type);
+// uso mis clases
+use Components\Footer;
+// use Components\Header;
+use Components\NavbarComponent;
+
+use Components\MainComponent;
 
 
-require("../components/header.html");
-?>
+// instancia de clases 
+$footer = new Footer;
+// $header =  new Header;
+$main = new MainComponent;
+$navBar= new NavbarComponent;
 
-<div class="content" id="content">
+$navBar->getNavbar($user_type);
+// implemeto metodos
+$main->getMain($user_type);
+$footer->getMainFooter($user_type);
 
-<?php
-  for ($i=0; $i < 4; $i++) 
-  {
-    echo "<div class='item-container animated fadeIn'> 
-                <div class='text-content'> 
-                    <p>     lorem Lorem ipsum dolor sit amet consectetur, adipisicing elit.             Illo temporibus 
-                    </p>
-                    <small> $i-$i  </small>
-                </div>
-                
-                <div class='img-container'>   
-                
-                </div>
-            </div>";
-    ?>
-   <?php
-    }?>
-</div>
-<?php
-include('../components/footer.html')
-?>    
+
+
+
+
+
+
 

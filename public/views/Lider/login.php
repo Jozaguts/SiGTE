@@ -2,6 +2,8 @@
 // requiero el auto cargador de clases
 require '../autoload.php';
 
+
+
 // uso mis clases
 use Components\Footer;
 use Components\Header;
@@ -16,7 +18,7 @@ $loginComponents= new LogoInputsLoginComponent;
 
 // implemeto metodos
 $footer->getFooter();
-$header->getLoginHeader();
+$header->getHeader('Iniciar Sesión');
 /* getComponents recibe el nivel o tipo de usuario
 Maestro =0
 Lider =1

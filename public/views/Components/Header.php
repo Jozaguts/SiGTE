@@ -4,31 +4,40 @@ class Header
 {
     // NOTA PARA MEJORA que la funcion requiera un parametro para ingresar el
     // encabezado el el header
-    public function getHeader()
-    {
+
+    protected $class = array(0 => "icon-bars", 1=>"icon-row-left");
+
+    public function getHeader($title,$subTitle=null,$ClassCss=null) {
+        
+        $iconBars = '<i></i>
+                    <i></i>
+                    <i></i>';
+        $title !='Noticias'? $ClassCss = $this->class[1]: $ClassCss = $this->class[0];
+        $subTitle ==null? $subTitle: $subTitle ='Sistema de gestión de trabajo en equipo';
+      
+
     echo   '<header class="header-mobile animated fadeIn">
-                <span class="icon-bars"> </span>
-                    <h1 class="header-mobile__title">Noticias</h1>
+                <span class="'.$ClassCss.'"> </span>
+                    <h1 class="header-mobile__title">'.$title.'</h1>
+                    <small class="small-title">'.$subTitle.'</small>
                 <span class="icon-more">
-                    <i></i>
-                    <i></i>
-                    <i></i>
+                    '.$iconBars.'
                 </span>
             </header>';
     }
 
-    public function getLoginHeader()
-    {
-    echo   '<header class="header-mobile animated fadeIn">
-                <span class="icon-row-left"> </span>
-                    <h1 class="header-mobile__title">Iniciar Sesión 
-                        <small class="small-title">Sistema de gestión de trabajo en equipo</small>
-                    </h1>
-                <span class="icon-more">
+    // public function getLoginHeader()
+    // {
+    // echo   '<header class="header-mobile animated fadeIn">
+    //             <span class="icon-row-left"> </span>
+    //                 <h1 class="header-mobile__title">Iniciar Sesión 
+    //                     <small class="small-title">Sistema de gestión de trabajo en equipo</small>
+    //                 </h1>
+    //             <span class="icon-more">
 
-                </span>
-            </header>';
-    }
+    //             </span>
+    //         </header>';
+    // }
     
 }
 ?>

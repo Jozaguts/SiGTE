@@ -29,10 +29,12 @@ class LogoInputsLoginComponent{
                         </div>  
                     </div>
                     <div class="login-form-container">
-                        <form id="loginForm">
+                        <form id="loginForm" method="post">
                         <input type="text" name="user" id="user" placeholder="Nombre">
+                        <small class="login-error login-error__user "></small>
                         <input type="password" name="password" id="password" placeholder="Contraseña">
-                        <button type="submit">Aceptar</button>
+                        <small class="login-error login-error__password"></small>
+                        <button id="btnLogin">Aceptar</button>
                         
                         </form>
                     </div>
