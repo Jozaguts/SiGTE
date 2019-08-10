@@ -234,8 +234,7 @@ document.getElementsByTagName('head')[0].appendChild(linkElement);
            })
         }else{
             document.querySelectorAll('input').forEach(function(input){
-                input.style.translateY="3px";
-                input.style.translateY="-3px";
+              
             })
         }
        
