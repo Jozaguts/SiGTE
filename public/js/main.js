@@ -177,13 +177,70 @@ document.getElementsByTagName('head')[0].appendChild(linkElement);
     // CREAR ALUMNO
 
     if(e.target.classList.contains('form-create-student-container-form-container__button')){
-        let jsonData={};
-        let data = $('.form-create-student-container__form').serializeArray();
-       data.forEach(element => {
-        jsonData[element.name] = element.value;
-       });
+        let inputError= true
+        let inputs = this.document.querySelectorAll('input')
+     
+        inputs.forEach(function(input,index){
+            if(input.value==""){
+           input.style.border = "1px solid red";
+          input.nextElementSibling.innerText= input.getAttribute('placeholder') +' No puede estar Vacio';
+          inputError = true;
+            }else{
+                input.style.border = " 1px solid #bdbdbd";
+                input.nextElementSibling.innerText="";
+                input.previousElementSibling.setAttribute('class', 'animated fadeIn');
+                input.previousElementSibling.style.color = " #bdbdbd";
+                input.previousElementSibling.innerText = input.getAttribute('placeholder');
+                inputError =false;
+            }
+        })
+        console.log(inputError);
+        if(!inputError){
+            let jsonData={};
+            let data = $('.form-create-student-container__form').serializeArray();
+           data.forEach(element => {
+            jsonData[element.name] = element.value;
+           });
+           console.log(jsonData);
+    
+    
+           fetch('public/DataBase/CreateStudent.php',{
+            method: 'POST',
+            headers: {'Content-Type':'application/x-www-form-urlencoded'}, 
+            body: JSON.stringify(jsonData)
+           }).then(function(response){
+            return response.json();
+           })
+           .then(function(jsonResponse){
+                 /* create the link element */
+            let linkElement = document.createElement('link');
+    
+            /* add attributes */
+            linkElement.setAttribute('rel', 'stylesheet');
+            linkElement.setAttribute('href', 'public/css/alerts.css');
+            linkElement.setAttribute('id', 'alerts');
+    
+            /* attach to the document head */
+            document.getElementsByTagName('head')[0].appendChild(linkElement);
+               
+            $(".container").load("public/views/maestro/SuccessAlert/StudentAlert/SuccessStudent.php", "data", function (response, status, request) {
+              
+                
+            });
+          
+           })
+           .catch((err) => {
+                this.console.log(err)
+           })
+        }else{
+            document.querySelectorAll('input').forEach(function(input){
+                input.style.translateY="3px";
+                input.style.translateY="-3px";
+            })
+        }
+       
 
-       this.console.log(jsonData);
+      
     }
 
     })//fin addEventListener();

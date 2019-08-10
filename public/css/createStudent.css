@@ -21,9 +21,9 @@
     padding: 1rem;
 }
 .form-create-student-container__form{
-    height: 100%;
+    height: 90vh;
     display: grid;
-    grid-template-rows: 85% 30%;
+    grid-template-rows: 80% 20%;
     background-color:var(--dark-primary-color);
 }
 .form-create-student-container-form__title{
@@ -38,6 +38,26 @@
     flex-direction: column;
     align-items: center;
 
+}
+.input-container{
+margin-bottom: .5rem;
+display: flex;
+flex-direction: column;
+}
+.input-container > input{ 
+    background: none;
+    width: 80vw;
+    min-height: 45px;
+    border: 1px solid var(--divider-color);
+    margin-bottom: 0;
+    color: var(--divider-color);
+    padding-left: 20px;
+    letter-spacing: 1px;
+}
+.small-message{
+    padding-top: .2rem;
+    padding-bottom: .3rem;
+    color: var(--primary-text-color);
 }
 .form-create-student-container-form__inputs-container > input{
     background: none;
@@ -64,7 +84,7 @@
  }
 .form-create-student-container-form-container__button{
     width: 80vw;
-    margin: auto;
+    /* margin: auto; */
     min-height: 50px;
     border: none;
     border-radius: 5px;
