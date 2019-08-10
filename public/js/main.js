@@ -3,38 +3,38 @@ $(document).ready(function () {
 
     let idsession = document.querySelector('input[type="hidden"]');
        
+        function goBack(){
+            if(idsession.getAttribute('data-session') != ""){
+                let type = parseInt(idsession.getAttribute('data-session'))
+                console.log(type)
+                switch (type) {
+                                   
+                    case 0:
+                         URL='public/views/maestro/home.php';
+                        goTo(URL);
+                        break;
+                        case 1:
+                         URL='public/views/lider/home.php';
+                        goTo(URL);
+                        break;
+                        case 2:
+                          
+                        URL='public/views/miembro/home.php';
+                        goTo(URL);
+                        break;
+                    default:
+                        console.log('No Hay Sesion Iniciada');
+                        break;
+                }
         
-    if(idsession.getAttribute('data-session') != ""){
-        let type = parseInt( idsession.getAttribute('data-session'))
-        console.log(type)
-        switch (type) {
-                           
-            case 0:
-                 URL='public/views/maestro/home.php';
-                goTo(URL);
-                console.log(jsonResponse);
-                break;
-                case 1:
-                 URL='public/views/lider/home.php';
-                goTo(URL);
-                console.log(jsonResponse);
-                break;
-                case 2:
-                    console.log('entro')
-                URL='public/views/miembro/home.php';
-                goTo(URL);
-                console.log(jsonResponse);
-                break;
-            default:
-                break;
+          
+            }else{
+              
+            }
+           
         }
-
-    //     goTo(parseInt(idsession))
-    //     console.log('redirige');
-    // }else{
-    //     console.log('vacio');
-    }
-    // console.log(idsession);
+        goBack();
+  
 
     // URLS
     const MAESTRO = 'public/views/maestro/login.php',
@@ -43,6 +43,20 @@ $(document).ready(function () {
 
 
     window.addEventListener('click',function(e){
+
+        // LISTENER PARA BOTON LOGOUT
+        if(e.target.classList.contains('logout-icon')){
+           
+            if( logOut()== 'Sesión Cerrada'){
+                console.log('Sesión Cerrada');
+            }else{
+                return false;
+            }
+
+         
+
+        }
+
         if(e.target.classList.contains('btn-login')) {
             
             let tipoUser = e.target.getAttribute('data-tipouser');
@@ -65,13 +79,8 @@ $(document).ready(function () {
 
 
         // icon regresar en el login
-        if(e.target.classList.contains('icon-row-left')) {
-            
-            $('.container').load(`public/views/home.html`,{
-            }, 
-            function (response, status, request) {
-                // console.log(response);
-            });
+        if(e.target.classList.contains('icon-row-left')) {   
+        goBack();
         }
 
 
@@ -115,17 +124,17 @@ $(document).ready(function () {
                             case 0:
                                  URL='public/views/maestro/home.php';
                                 goTo(URL);
-                                console.log(jsonResponse);
+                                
                                 break;
                                 case 1:
                                  URL='public/views/lider/home.php';
                                 goTo(URL);
-                                console.log(jsonResponse);
+                               
                                 break;
                                 case 2:
                                 URL='public/views/miembro/home.php';
                                 goTo(URL);
-                                console.log(jsonResponse);
+                                
                                 break;
                             default:
                                 break;
@@ -139,16 +148,101 @@ $(document).ready(function () {
             
             
                 }
-                
-    //    LISTENER PARA BOTON TOGGLE MENU O BOTON DE HAMBURGESA
 
-    
-            
-    }//fin addEventListener();
+    }
         
             
-        
+            // Acciones de botones
+    $('.Alta-de-Alumno').on('click',function(){
+
+        /* create the link element */
+var linkElement = document.createElement('link');
+
+/* add attributes */
+linkElement.setAttribute('rel', 'stylesheet');
+linkElement.setAttribute('href', 'public/css/createStudent.css');
+linkElement.setAttribute('id', 'createStudent');
+
+/* attach to the document head */
+document.getElementsByTagName('head')[0].appendChild(linkElement);
+
+        $('.container').load(`public/views/maestro/CreateStudent.php`,{
+        }, 
+        function (response, status, request) {
+            
+        });
     })
+
+
+    // CREAR ALUMNO
+
+    if(e.target.classList.contains('form-create-student-container-form-container__button')){
+        let inputError= true
+        let inputs = this.document.querySelectorAll('input')
+     
+        inputs.forEach(function(input,index){
+            if(input.value==""){
+           input.style.border = "1px solid red";
+          input.nextElementSibling.innerText= input.getAttribute('placeholder') +' No puede estar Vacio';
+          inputError = true;
+            }else{
+                input.style.border = " 1px solid #bdbdbd";
+                input.nextElementSibling.innerText="";
+                input.previousElementSibling.setAttribute('class', 'animated fadeIn');
+                input.previousElementSibling.style.color = " #bdbdbd";
+                input.previousElementSibling.innerText = input.getAttribute('placeholder');
+                inputError =false;
+            }
+        })
+        console.log(inputError);
+        if(!inputError){
+            let jsonData={};
+            let data = $('.form-create-student-container__form').serializeArray();
+           data.forEach(element => {
+            jsonData[element.name] = element.value;
+           });
+           console.log(jsonData);
+    
+    
+           fetch('public/DataBase/CreateStudent.php',{
+            method: 'POST',
+            headers: {'Content-Type':'application/x-www-form-urlencoded'}, 
+            body: JSON.stringify(jsonData)
+           }).then(function(response){
+            return response.json();
+           })
+           .then(function(jsonResponse){
+                 /* create the link element */
+            let linkElement = document.createElement('link');
+    
+            /* add attributes */
+            linkElement.setAttribute('rel', 'stylesheet');
+            linkElement.setAttribute('href', 'public/css/alerts.css');
+            linkElement.setAttribute('id', 'alerts');
+    
+            /* attach to the document head */
+            document.getElementsByTagName('head')[0].appendChild(linkElement);
+               
+            $(".container").load("public/views/maestro/SuccessAlert/StudentAlert/SuccessStudent.php", "data", function (response, status, request) {
+              
+                
+            });
+          
+           })
+           .catch((err) => {
+                this.console.log(err)
+           })
+        }else{
+            document.querySelectorAll('input').forEach(function(input){
+              
+            })
+        }
+       
+
+      
+    }
+
+    })//fin addEventListener();
 
     
     
@@ -167,6 +261,27 @@ $(document).ready(function () {
             
             });
      
+    }
+
+    // CERRAR SESION
+
+    function logOut(){
+        fetch('public/DataBase/LogOut.php')
+        .then(function(response){
+            return response.json();
+        })
+        .then(function(josnResponse){
+          
+            if(josnResponse == 'Sesión Cerrada'){
+
+                $('.container').load(`public/views/home.html`,{
+                }, 
+                function (response, status, request) {
+                 
+                });
+            }
+        })
+
     }
 
    

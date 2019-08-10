@@ -9,9 +9,7 @@ $user_type = $_SESSION['user_type_id'];
 use Components\Footer;
 // use Components\Header;
 use Components\NavbarComponent;
-
 use Components\MainComponent;
-
 
 // instancia de clases 
 $footer = new Footer;

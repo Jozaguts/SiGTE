@@ -30,7 +30,7 @@ class LogoInputsLoginComponent{
                     </div>
                     <div class="login-form-container">
                         <form id="loginForm" method="post">
-                        <input type="text" name="user" id="user" placeholder="Nombre">
+                        <input type="text" name="username" id="user" placeholder="Nombre de Usuario">
                         <small class="login-error login-error__user "></small>
                         <input type="password" name="password" id="password" placeholder="Contraseña">
                         <small class="login-error login-error__password"></small>

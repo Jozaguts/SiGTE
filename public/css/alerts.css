@@ -1,0 +1,70 @@
+:root{
+    --dark-primary-color : #303F9F;
+    --default-primary-color:#3F51B5;
+    --light-primary-color:#C5CAE9;
+    --text-icons-color: #FFFFFF; 
+    --accent-color:#448AFF;
+    --primary-text-color:#212121;
+    --secondary-text-color :#757575;
+    --divider-color :#BDBDBD; 
+} 
+
+.alert-container{
+    display: grid;
+    width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20%;
+    margin-bottom: 25%;
+    height: 80vh;
+    grid-template-rows: 50% 5% 40% 5%;
+}
+
+.alert-icon-container{
+    background-image: url('../img/icons/Checkbox.png');
+    background-position: 50% 50%;
+    width: 70%;
+    height: 50%;
+    background-size: contain;
+    display: block;
+    margin: auto;
+    background-repeat: no-repeat;
+
+}
+.alert-messager-container{
+    text-align: center;
+
+}
+.message{
+color: var(--primary-text-color);
+font-size: 1.5rem;
+}
+.options-container{
+display: flex;
+justify-content: center;
+align-items: flex-end;
+}
+.option-ok{
+    background-image: url('../img/icons/yes.png');
+    background-position: 50% 50%;
+    width: 30%;
+    height: 30%;
+    background-size: contain;
+    display: block;
+
+    background-repeat: no-repeat;
+}
+.option-not{
+    background-image: url('../img/icons/no.png');
+    background-position: 50% 50%;
+    width: 30%;
+    height: 30%;
+    background-size: contain;
+    display: block;
+    background-repeat: no-repeat;
+}
+.question-contanier{
+text-align: center;
+font-size: 1rem;
+color: var(--secondary-text-color);
+}

@@ -24,11 +24,13 @@ class  MainComponent{
     }
 
     function generateActivities($listActivitys){
+       
         echo '<main class="main-content-container">';
         echo '<span class="go-back-icon-container"><i class="go-back-icon"></i></span>';
         echo '<ul class="main-content-container__list">';
             for ($i=0; $i <count($listActivitys); $i++) { 
-        echo '<li class="main-content-container-list__item">'.$listActivitys[$i].'</li>';
+                $class = str_replace(" ", "-", $listActivitys[$i]);
+        echo '<li class="main-content-container-list__item '.$class.'">'.$listActivitys[$i].'</li>';
       }
       echo'</ul>';
       echo '</main>';

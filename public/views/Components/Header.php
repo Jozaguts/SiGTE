@@ -26,18 +26,7 @@ class Header
             </header>';
     }
 
-    // public function getLoginHeader()
-    // {
-    // echo   '<header class="header-mobile animated fadeIn">
-    //             <span class="icon-row-left"> </span>
-    //                 <h1 class="header-mobile__title">Iniciar Sesión 
-    //                     <small class="small-title">Sistema de gestión de trabajo en equipo</small>
-    //                 </h1>
-    //             <span class="icon-more">
-
-    //             </span>
-    //         </header>';
-    // }
+   
     
 }
 ?>
