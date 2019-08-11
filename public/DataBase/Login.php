@@ -1,5 +1,5 @@
 <?php namespace DataBase;
-require 'Conection.php';
+require_once 'Conection.php';
 // ini_set('error_reporting', E_STRICT);
 
 $conexion= new Conection;
@@ -19,7 +19,7 @@ if ($stmt = $conected->prepare("SELECT * FROM user WHERE username=? and password
       $stmt->execute();
       $stmt->store_result();
     /* bind result variables */
-    $stmt->bind_result($user_id, $name, $paternal_name, $maternal_name, $password, $user_type_id, $email,$username);
+    $stmt->bind_result($user_id, $name, $paternal_name, $maternal_name, $password, $user_type_id, $email,$username,$id_team);
     // var_dump($stmt->affected_rows);
    
     /* fetch value */
@@ -35,7 +35,8 @@ if ($stmt = $conected->prepare("SELECT * FROM user WHERE username=? and password
             'maternal_name'=> $maternal_name,
             'type' => $user_type_id,
             'email'=> $email,
-            'username'=>$username
+            'username'=>$username,
+            'id_team'=>$id_team
 
         );
         // INICIO EN EL MANEJO DE SESIONES
@@ -46,6 +47,7 @@ if ($stmt = $conected->prepare("SELECT * FROM user WHERE username=? and password
         $_SESSION['paternal_name']  = $paternal_name;
         $_SESSION['maternal_name']  = $maternal_name;
         $_SESSION['email']  = $email;
+        $_SESSION['id_team']  = $id_team;
         
         
         echo json_encode($response); 

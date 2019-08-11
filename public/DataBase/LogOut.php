@@ -1,5 +1,5 @@
 <?php namespace DataBase;
-require 'Conection.php';
+require_once 'Conection.php';
 
 session_start(); 
 session_destroy();

@@ -3,7 +3,7 @@
 class Alert 
 {
    
-    public function getSuccessAlert($message){
+    public function getSuccessAlert($message,array $link){
     echo    '
             <div class="alert-container">
                 <div class="alert-icon-container"></div>
@@ -11,8 +11,8 @@ class Alert
                     <p class="message">'.$message.'</p>
                 </div>
                 <div class="options-container">
-                    <span class="option-ok"></span>
-                    <span class="option-not"></span>
+                    <span class="option-ok" value="'.$link[0].'" ></span>
+                    <span class="option-not" value="'.$link[1].'"></span>
                 </div>
                 <div class="question-contanier">¿Repetir Operación?</div>
             </div>

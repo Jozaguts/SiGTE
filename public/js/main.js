@@ -6,18 +6,18 @@ $(document).ready(function () {
         function goBack(){
             if(idsession.getAttribute('data-session') != ""){
                 let type = parseInt(idsession.getAttribute('data-session'))
-                console.log(type)
+               
                 switch (type) {
                                    
-                    case 0:
+                    case 1:
                          URL='public/views/maestro/home.php';
                         goTo(URL);
                         break;
-                        case 1:
+                        case 2:
                          URL='public/views/lider/home.php';
                         goTo(URL);
                         break;
-                        case 2:
+                        case 3:
                           
                         URL='public/views/miembro/home.php';
                         goTo(URL);
@@ -60,15 +60,15 @@ $(document).ready(function () {
         if(e.target.classList.contains('btn-login')) {
             
             let tipoUser = e.target.getAttribute('data-tipouser');
-            
+            console.log(tipoUser);
             switch (tipoUser) {
-                case '0':
+                case '1':
                     goTo(MAESTRO);
                     break;
-                case '1':
+                case '2':
                     goTo(LIDER);
                  break;
-                case '2':
+                case '3':
                     goTo(MIEMBRO);
                     break;
                 default:
@@ -121,17 +121,17 @@ $(document).ready(function () {
                         let URL='';
                         switch (jsonResponse.type) {
                            
-                            case 0:
+                            case 1:
                                  URL='public/views/maestro/home.php';
                                 goTo(URL);
                                 
                                 break;
-                                case 1:
+                                case 2:
                                  URL='public/views/lider/home.php';
                                 goTo(URL);
                                
                                 break;
-                                case 2:
+                                case 3:
                                 URL='public/views/miembro/home.php';
                                 goTo(URL);
                                 
@@ -166,7 +166,7 @@ linkElement.setAttribute('id', 'createStudent');
 /* attach to the document head */
 document.getElementsByTagName('head')[0].appendChild(linkElement);
 
-        $('.container').load(`public/views/maestro/CreateStudent.php`,{
+        $('.container').load(`public/views/maestro/AdminStudent/CreateStudent.php`,{
         }, 
         function (response, status, request) {
             
@@ -177,32 +177,37 @@ document.getElementsByTagName('head')[0].appendChild(linkElement);
     // CREAR ALUMNO
 
     if(e.target.classList.contains('form-create-student-container-form-container__button')){
-        let inputError= true
+      
         let inputs = this.document.querySelectorAll('input')
      
         inputs.forEach(function(input,index){
             if(input.value==""){
            input.style.border = "1px solid red";
           input.nextElementSibling.innerText= input.getAttribute('placeholder') +' No puede estar Vacio';
-          inputError = true;
+         
             }else{
                 input.style.border = " 1px solid #bdbdbd";
                 input.nextElementSibling.innerText="";
                 input.previousElementSibling.setAttribute('class', 'animated fadeIn');
                 input.previousElementSibling.style.color = " #bdbdbd";
                 input.previousElementSibling.innerText = input.getAttribute('placeholder');
-                inputError =false;
+                
             }
+            
         })
-        console.log(inputError);
-        if(!inputError){
+        let count=0;
+        inputs.forEach(element => {
+            element.value==""?count++:count;
+        });
+  
+        if(count==0){
             let jsonData={};
             let data = $('.form-create-student-container__form').serializeArray();
            data.forEach(element => {
             jsonData[element.name] = element.value;
            });
            console.log(jsonData);
-    
+          
     
            fetch('public/DataBase/CreateStudent.php',{
             method: 'POST',
@@ -212,16 +217,7 @@ document.getElementsByTagName('head')[0].appendChild(linkElement);
             return response.json();
            })
            .then(function(jsonResponse){
-                 /* create the link element */
-            let linkElement = document.createElement('link');
-    
-            /* add attributes */
-            linkElement.setAttribute('rel', 'stylesheet');
-            linkElement.setAttribute('href', 'public/css/alerts.css');
-            linkElement.setAttribute('id', 'alerts');
-    
-            /* attach to the document head */
-            document.getElementsByTagName('head')[0].appendChild(linkElement);
+   
                
             $(".container").load("public/views/maestro/SuccessAlert/StudentAlert/SuccessStudent.php", "data", function (response, status, request) {
               
@@ -241,6 +237,126 @@ document.getElementsByTagName('head')[0].appendChild(linkElement);
 
       
     }
+
+    // regresar a crear alumno
+    if(e.target.classList.contains('option-ok')){
+        let link = e.target.getAttribute('value');
+       
+        $('.container').load(`public/views/maestro/AdminStudent/${link}.php`, 
+
+         function (response, status, request) {
+        
+            
+            
+        });
+    }
+    // salir de crear alumno
+    if(e.target.classList.contains('option-not')){
+        let link = e.target.getAttribute('value');
+     
+        $('.container').load(`public/views/maestro/${link}.php`, 
+
+         function (response, status, request) {
+        
+            
+            
+        });
+    }
+
+    // asignarl alumno
+      
+    if(e.target.classList.contains('Asignar-Alumno')){
+
+        $('.container').load('public/views/maestro/AdminStudent/AssignStudent.php', function (response, status, request) {
+            this; // dom element
+            
+        });
+    }
+    if(e.target.classList.contains('form-assing-student-container-form-container__button')){
+
+
+        let selects = document.querySelectorAll('select');
+// console.log(selects);
+        selects.forEach(select => {
+          if(select.options[select.selectedIndex].value == 'false'){
+            select.nextElementSibling.innerText = 'Seleccione Una Opción';
+          }else{
+            select.nextElementSibling.innerText = '';
+          }      
+        });
+        let count=0;
+        selects.forEach(select => {
+            select.options[select.selectedIndex].value == 'false'?count++:count;
+        });
+        
+        if(count == 0){
+
+            let data={};
+            data.user_id =$("#alumno").find(":selected").val();
+            data.id_project =$("#proyecto").find(":selected").val();
+            data.id_team =$("#equipo").find(":selected").val();
+            data.leader= $("input[name=leader]:checked").val()==undefined? data.leader='false':data.leader= $("input[name=leader]:checked").val();
+            console.log(data)
+            // data.request= 'assingStudent';
+
+            fetch('public/DataBase/AssingStudent.php',{
+                method: 'POST',
+                headers: {'Content-Type':'application/x-www-form-urlencoded'}, 
+                body: JSON.stringify(data)
+               }).then(function(res){
+                return res.json();
+               }).then(function(res){
+
+                $(".container").load("public/views/maestro/SuccessAlert/StudentAlert/SuccessStudent.php", "data", function (response, status, request) {
+              
+                
+                });
+
+               }).catch((err) => {
+                console.log(err);    
+               })
+        }
+        
+    }
+    
+ // evaluar alumno
+
+ if(e.target.classList.contains('Evaluar-Alumno')){
+
+    $('.container').load('public/views/maestro/AdminStudent/EvalueStudent.php', function (response, status, request) {
+        this; // dom element
+        
+    });
+
+   
+
+
+
+
+}// if de evaluar alumno 
+
+ // estoy fuera del if
+ $('#alumno').on('change', function(e) {
+    e.stopPropagation();
+    id = this.value
+
+ 
+    fetch('public/DataBase/EvalueStudent.php',{
+        method: 'POST',
+        headers: {'Content-Type':'application/x-www-form-urlencoded'}, 
+        body: JSON.stringify(id)
+       }).
+       then(function (res) {res.json()  })
+       .then(function (resJson) {console.log(resJson)})
+       .catch((err) => {
+            console.log(err);
+       })
+       
+    
+
+     
+  });
+
 
     })//fin addEventListener();
 

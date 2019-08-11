@@ -15,36 +15,43 @@
   and (max-device-width: 667px) 
   and (-webkit-min-device-pixel-ratio: 2) { 
    
-.form-create-student-container{
+.form-create-student-container {
     width: 100%;
     height: 100%;
     padding: 1rem;
 }
-.form-create-student-container__form{
+.form-create-student-container__form {
     height: 90vh;
     display: grid;
     grid-template-rows: 80% 20%;
     background-color:var(--dark-primary-color);
 }
-.form-create-student-container-form__title{
+.form-create-student-container-form__title {
     text-align: center;
     padding: 1rem;
     font-size: 1rem;
     font-weight: 600;
 }
-.form-create-student-container-form__inputs-container{
+.form-create-student-container-form__subtitle {
+    text-align: center;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary-text-color);
+}
+.form-create-student-container-form__inputs-container {
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
     align-items: center;
 
 }
-.input-container{
+.input-container {
 margin-bottom: .5rem;
 display: flex;
 flex-direction: column;
 }
-.input-container > input{ 
+.input-container > input, select { 
     background: none;
     width: 80vw;
     min-height: 45px;
@@ -59,12 +66,12 @@ flex-direction: column;
     padding-bottom: .3rem;
     color: var(--primary-text-color);
 }
-.form-create-student-container-form__inputs-container > input{
+.form-create-student-container-form__inputs-container > input, select{
     background: none;
     width: 80vw;
     min-height: 50px;
     border: 1px solid var(--divider-color);
-    margin-bottom: 2rem;
+    margin-bottom: 0rem;
     color: var(--divider-color);
     padding-left: 20px;
     letter-spacing: 1px;
@@ -81,14 +88,50 @@ flex-direction: column;
      flex-direction: column;
      justify-content: center;
      align-items: center;
+     background-color: var(--default-primary-color);
  }
-.form-create-student-container-form-container__button{
+.form-create-student-container-form-container__button, .form-assing-student-container-form-container__button{
     width: 80vw;
     /* margin: auto; */
     min-height: 50px;
     border: none;
     border-radius: 5px;
     background-color: var(--accent-color);
+}
+.is-leader-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    background: none;
+    width: 80vw;
+    min-height: 50px;
+    border: 1px solid var(--divider-color);
+    margin-bottom: 2rem;
+    color: var(--divider-color);
+    padding-left: 20px;
+    position: relative;
+}
+.is-leader-container > .question{
+
+    text-align: center;
+    color: var(--secondary-text-color);
+}
+#si::after{
+content: "Si";
+display: block;
+font-size: 12px;
+position: absolute;
+top:0;
+left: 60vw;
+}
+#no::after{
+    content: "No";
+    display: block;
+    font-size: 12px;
+    position: absolute;
+    top:0;
+    left: 72vw;
 }
 
 

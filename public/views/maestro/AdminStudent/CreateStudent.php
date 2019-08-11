@@ -1,9 +1,9 @@
-<?php namespace Maestro;
+<?php namespace AdminStudent;
 
 use Components\Header;
 
 
-require ('../autoload.php');
+require ('../../autoload.php');
 session_start();
 $user_type = $_SESSION['user_type_id'];
 $header = new Header;
@@ -15,7 +15,7 @@ echo '<div class="form-create-student-container">
 
         <div class="form-create-student-container-form__inputs-container">
 
-            <h2 class="form-create-student-container-form__title">Alta de Alumno</h2>
+            <h2 class="form-create-student-container-form__title">Alta Alumno</h2>
 
             <div class="input-container">
                 <small class="small-name">   </small>

@@ -8,15 +8,15 @@ class  MainComponent{
 
         switch ($user_type) {
             
-            case 0:
+            case 1:
             $listActivitys = array( 0=> 'Alta de Alumno',1=>'Asignar Alumno',2=>'Evaluar Alumno');
                 $generateActivities = $this->generateActivities($listActivitys);
                 break;
-            case 1:
+            case 2:
             $listActivitys = array( 0=> 'Asignar Actividades');
             $generateActivities= $this->generateActivities($listActivitys);
                 break;
-            case 2:
+            case 3:
             $listActivitys = array( 0=> 'Actividades Asignadas',1=>'Enviar Evidencia');
                 $generateActivities= $this->generateActivities($listActivitys);
                 break; 

@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="public/css/main.css">
+    <link rel="stylesheet" href="public/css/createStudent.css">
+    <link rel="stylesheet" href="public/css/alerts.css">
     <title>SiGTE</title>
 </head>
 <body>
@@ -31,17 +33,14 @@
             SiGTE
             <?php
     session_start();
-    $idSession = $_SESSION['user_type_id'];
-    echo '<input type="hidden" name="session" data-session="'.$idSession.'">'
-?>
+    ?>
         </span>
         <?php
-        session_start();
-        // var_dump($_SESSION);
+        
+   
         if(isset($_SESSION['user_type_id']))
         {
             $idSession = $_SESSION['user_type_id'];
-            var_dump( $idSession);
         ?> 
              <input type="hidden" name="session" data-session="<?=$idSession?>">
         <?php
@@ -54,8 +53,6 @@
         <?php
         }
         ?>
-        
-
         <!-- fin de la marca -->
         <!-- botones de login -->
 
@@ -63,9 +60,9 @@
             
             <span>Iniciar Sesión</span>
             
-                <button class="btn btn-maestro btn-login"data-tipouser="0">Maestro</button>
-                <button class="btn btn-lider btn-login" data-tipouser="1">Líder de Equipo</button>
-                <button class="btn btn-miembro btn-login" data-tipouser="2">Miembre de Equipo</button> 
+                <button class="btn btn-maestro btn-login"data-tipouser="1">Maestro</button>
+                <button class="btn btn-lider btn-login" data-tipouser="2">Líder de Equipo</button>
+                <button class="btn btn-miembro btn-login" data-tipouser="3">Miembre de Equipo</button> 
      
          
         </div>

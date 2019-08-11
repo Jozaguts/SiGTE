@@ -6,5 +6,5 @@ session_start();
 $message=$_SESSION['alert'];
 
 $alert = new Alert;
-$link = array('CreateStudent','home') ;
-$alert->getSuccessAlert($message, $link);
+$link2 = array('AssignStudent','home') ;
+$alert->getSuccessAlert($message, $link2);
