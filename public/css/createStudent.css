@@ -50,6 +50,7 @@
 margin-bottom: .5rem;
 display: flex;
 flex-direction: column;
+position: relative;
 }
 .input-container > input, select { 
     background: none;
@@ -66,7 +67,7 @@ flex-direction: column;
     padding-bottom: .3rem;
     color: var(--primary-text-color);
 }
-.form-create-student-container-form__inputs-container > input, select{
+.form-create-student-container-form__inputs-container > input, select, textarea{
     background: none;
     width: 80vw;
     min-height: 50px;
@@ -82,6 +83,12 @@ flex-direction: column;
     padding-left: 20px;
     letter-spacing: 1px;
  }
+ textarea::placeholder{
+    color: var(--divider-color);
+    padding-left: 20px;
+    text-align: left;
+    letter-spacing: 1px;
+ }
 
  .form-create-student-container-form-button-container{
      display: flex;
@@ -90,7 +97,10 @@ flex-direction: column;
      align-items: center;
      background-color: var(--default-primary-color);
  }
-.form-create-student-container-form-container__button, .form-assing-student-container-form-container__button{
+.form-create-student-container-form-container__button, .form-assing-student-container-form-container__button,
+.form-assing-student-container-form-container__button__evalueStudent,
+.form-create-student-container-form-container__button_create-team,
+.form-create-student-container-form-container__button_create-project{ 
     width: 80vw;
     /* margin: auto; */
     min-height: 50px;
@@ -132,6 +142,44 @@ left: 60vw;
     position: absolute;
     top:0;
     left: 72vw;
+}
+.input-table{
+    width: 3rem;
+    height: 50px;
+    background: none;
+    margin: auto auto;
+    display: block;
+    border: 1px solid var(--divider-color);
+    
+    color: var(--divider-color);
+    letter-spacing: 1px;
+}
+tr >td {
+    text-align: center;
+    text-transform: capitalize;
+    color:var(--secondary-text-color);
+}
+#name_activity{
+    width: 60vw;
+   
+}
+
+.width-input-name-activity{
+    width: 80vw;
+}
+.btn-span{
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    background-color: var(--accent-color);
+    color: var(--text-icons-color);
+    text-align: center;
+    border-radius: 5px;
+    top: calc(50% - 1rem);
+    margin-right: 1rem;
+    font-size: 1.5rem; 
+    right: 0;
+
 }
 
 

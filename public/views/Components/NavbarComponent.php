@@ -9,15 +9,15 @@ class NavbarComponent {
         switch ($user_type) {
             
             case 1:
-            $liItems = array( 0=> 'studens-icon',1=>'team-icon',2=>'project-icon',3=>'message-icon');
+            $liItems = array( 0=> 'studens-icon studens-icon_teacher ',1=>'team-icon team-icon_teacher',2=>'project-icon project-icon_teacher',3=>'message-icon message-icon_teacher');
                 $genertaLi = $this->generateLi($liItems);
                 break;
             case 2:
-            $liItems = array( 0=>'team-icon',1=>'project-icon',2=>'message-icon');
+            $liItems = array( 0=>'team-icon team-icon_leader',1=>'project-icon project-icon_leader',2=>'message-icon message-icon_leader');
                 $genertaLi= $this->generateLi($liItems);
                 break;
             case 3:
-            $liItems = array( 0=>'project-icon',1=>'message-icon');
+            $liItems = array( 0=>'project-icon project-icon_member',1=>'message-icon message-icon_member');
                 $genertaLi= $this->generateLi($liItems);
                 break; 
         }

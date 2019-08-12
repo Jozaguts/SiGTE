@@ -29,7 +29,6 @@ $arrayResponse= $students->getStudentsWithAssignedActivities();
 
 
 
-
 echo '<div class="form-create-student-container">
     <form class="form-create-student-container__form">
 
@@ -39,7 +38,7 @@ echo '<div class="form-create-student-container">
 
             <div class="input-container">
                 <small class="small-name">   </small>
-                <select name="alumno" id="alumno" class="" > 
+                <select name="alumno" id="alumno" class="getWithActivitys" > 
                 <option value="false">Elija a un Alumno</option> ';
                     foreach ($arrayResponse as $student) {
                         echo '<option value="'.$student['user_id'].'">'.$student['username'].' </option>';
@@ -56,14 +55,7 @@ echo '<div class="form-create-student-container">
                 </tr>
             </thead>
             <tbody id="tbody";>
-                <tr>
-                <td>January</td>
-                <td>$100</td>
-                </tr>
-                <tr>
-                <td>February</td>
-                <td>$80</td>
-                </tr>
+            
             </tbody>
             
             </table>
@@ -78,7 +70,7 @@ echo '<div class="form-create-student-container">
         </div>
         
         <div class="form-create-student-container-form-button-container">
-        <button class="form-assing-student-container-form-container__button">Aceptar</button>
+        <button class="form-assing-student-container-form-container__button__evalueStudent" id="evalueStudent">Aceptar</button>
         </div>
     </form>
     </div>';

@@ -135,7 +135,7 @@ class Students {
         
         // consulta solo para traer los alumnos que no has sido asignados y al maestro TODOS ESTAN EN LA TABLA USER
         $query=
-        "SELECT username
+        "SELECT DISTINCT username, user_id
         from `user`, activity
         where user.user_id = activity.id_user;";
         // WHERE user_id = $user_id";
@@ -153,7 +153,10 @@ class Students {
             $students = array();
              while ($row = mysqli_fetch_array($response)) {
 
-                array_push($students, array( "username" => $row['username']));
+                array_push($students, array(
+                    "username" => $row['username'],
+                    "user_id" => $row['user_id']  
+                ));
             }
         //  si quiero regesarlo a JS
             // $jsonRespose = json_encode($Teams);
@@ -164,4 +167,89 @@ class Students {
            
         }
     }
+
+    function getAllTheActivitiesOfAStudent($idStudent){
+
+        // var_dump($user_id);
+
+        $connection = new Conection;
+        
+        // consualta para traer las actividades asignadas a un cierto ID
+        $query=
+        "SELECT DISTINCT name_activity, status_activity, score,id_activity, id_user
+        from activity
+        where id_user = $idStudent;";
+        // WHERE user_id = $user_id";
+   
+    //    se ejecuta la consulta si falla se mata el proceso
+        $response = mysqli_query($connection->Connect(), $query) or die("Error de Consulta" . mysqli_error($connection->Connect()));
+        // obtengo el numero de columnas de la respuesta que da la base de datos
+        $rowsCoutn = mysqli_num_rows($response);
+
+     
+
+        if ($rowsCoutn == 0) {
+            echo "Alumno sin Actividades";
+        }else{
+            $activities = array();
+             while ($row = mysqli_fetch_array($response)) {
+
+                array_push($activities, array(
+                    "name_activity" => $row['name_activity'],
+                    "id_activity" => $row['id_activity'],
+                    "id_user" => $row['id_user'],
+                    "status_activity" => $row['status_activity'],
+                    "score" => $row['score']  
+                ));
+            }
+        //  si quiero regesarlo a JS
+            $jsonRespose = json_encode($activities);
+            echo $jsonRespose;
+            // me brinco el paso de js y lo pinto mandanlo directamet al archivo que lo necesita
+            
+            // return $activities; 
+
+           
+        }
+    }
+    function SetScoreStudent($array){
+        foreach ($array as $key ) {
+            $connection = new Conection;
+
+            $user_id= $key['user_id'];
+            $id_activity= $key['id_activity'];
+            $score = $key['score'];
+
+            (int)$user_id;
+            (int)$id_activity;
+            (int)$score;
+            
+
+            $query= "UPDATE activity
+            SET score = $score
+            WHERE id_user = $user_id AND id_activity = $id_activity;";
+
+     $response = mysqli_query($connection->Connect(), $query) or die("Error de Consulta" . mysqli_error($connection->Connect()));
+
+     if ($response == 0) {
+       $res = "No se actualizo Alumno";
+       echo json_encode($res); 
+   }else{
+   
+
+       mysqli_close($connection->Connect());
+  
+      
+   }
+        }
+
+        $_SESSION['alert'] =  'Alumno Evaluado Correctamente';
+
+        $res = "Alumno Calificado";
+        echo json_encode($res);
+    }
+
+
+
+
 }

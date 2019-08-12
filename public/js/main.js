@@ -43,7 +43,7 @@ $(document).ready(function () {
 
 
     window.addEventListener('click',function(e){
-
+        e.stopPropagation();
         // LISTENER PARA BOTON LOGOUT
         if(e.target.classList.contains('logout-icon')){
            
@@ -242,7 +242,7 @@ document.getElementsByTagName('head')[0].appendChild(linkElement);
     if(e.target.classList.contains('option-ok')){
         let link = e.target.getAttribute('value');
        
-        $('.container').load(`public/views/maestro/AdminStudent/${link}.php`, 
+        $('.container').load(`public/views/${link}.php`, 
 
          function (response, status, request) {
         
@@ -336,7 +336,7 @@ document.getElementsByTagName('head')[0].appendChild(linkElement);
 }// if de evaluar alumno 
 
  // estoy fuera del if
- $('#alumno').on('change', function(e) {
+ $('.getWithActivitys').on('change', function(e) {
     e.stopPropagation();
     id = this.value
 
@@ -345,9 +345,43 @@ document.getElementsByTagName('head')[0].appendChild(linkElement);
         method: 'POST',
         headers: {'Content-Type':'application/x-www-form-urlencoded'}, 
         body: JSON.stringify(id)
-       }).
-       then(function (res) {res.json()  })
-       .then(function (resJson) {console.log(resJson)})
+       })
+       .then(function(res) {
+            return res.json();  
+        })
+       .then(function (resJson) {
+       
+        // let tr = document.createElement('tr');
+        resJson.forEach(function(row ,index){
+             index = document.createElement('tr');
+                let td1 = document.createElement('td')
+                let td2 = document.createElement('td')
+                let td3 = document.createElement('td')
+                let input = document.createElement('input')
+                input.setAttribute('type','number');
+                input.setAttribute('data-userid',`${row.id_user}`);
+                input.setAttribute('data-activity',`${row.id_activity}`);
+                input.setAttribute('class','input-table');
+                row.score==null?row.score=0:row.score==row.score;
+                input.setAttribute('placeholder',row.score);
+  
+    
+                
+            td1.innerText = row.name_activity;
+            $(index).append(td1);
+            td2.innerText = row.status_activity;
+            $(index).append(td2); 
+            $(td3).append(input); 
+            $(index).append(td3);
+            
+           
+            $('#tbody').append(index);
+        })
+      
+ 
+
+          
+        })
        .catch((err) => {
             console.log(err);
        })
@@ -357,8 +391,242 @@ document.getElementsByTagName('head')[0].appendChild(linkElement);
      
   });
 
+//   evaluar alumon mandar calificaicon
+
+if(e.target.classList.contains('form-assing-student-container-form-container__button__evalueStudent')) {
+    let inputs = document.querySelectorAll('input');
+    let arraydata=[];
+    inputs.forEach(function(input){
+        let data= {};
+        data.user_id = input.getAttribute('data-userid');
+        data.id_activity = input.getAttribute('data-activity');
+        data.score = input.value;
+        arraydata.push(data)
+    })
+    fetch('public/DataBase/SetScoreStudent.php',{
+        method: 'POST',
+        headers: {'Content-Type':'application/x-www-form-urlencoded'}, 
+        body: JSON.stringify(arraydata)
+       })
+       .then(function(response){
+        return response.json();
+       })
+       .then(function(jsonResponse){
+
+        $(".container").load("public/views/maestro/SuccessAlert/StudentAlert/SuccessStudent.php", "data", function (response, status, request) {
+              
+                
+        });
+       })
+}
+
+
+// botones navbar maestro
+if(e.target.classList.contains('studens-icon_teacher')){
+    e.stopPropagation();
+    $('.main-content-container__list').html(`
+    
+    <li class="main-content-container-list__item Alta-de-Alumno "> Alta de Alumno</li>
+    <li class="main-content-container-list__item Asignar-Alumno ">Asignar Alumno</li>
+    <li class="main-content-container-list__item Evaluar-Alumno ">Evaluar Alumno</li>
+    `);
+}
+
+
+if(e.target.classList.contains('team-icon_teacher')){
+    e.stopPropagation();
+    $('.main-content-container__list').html(`
+    <li class="main-content-container-list__item main-content-container-list__item_teacher">Registrar Equipo</li>
+    `);
+}
+if(e.target.classList.contains('project-icon_teacher')){
+    e.stopPropagation();
+    $('.main-content-container__list').html(`
+    
+    <li class="main-content-container-list__item main-content-container-list__item__register-project  "> Registrar Proyecto</li>
+    <li class="main-content-container-list__item  main-content-container-list__item__advances-project">Avances y Evidencias del Proyecto</li>
+    <li class="main-content-container-list__item main-content-container-list__item__evalute-project">Evaluar Proyecto</li>
+    <li class="main-content-container-list__item main-content-container-list__item__
+    10/5000
+    results-project">Resultados de Proyectos</li>
+    `);
+}
+
+// 
+// 
+// 
+// 
+// 
+// 
+// 
+// espacio para los botones del navbar
+
+
+// crear equipo
+if(e.target.classList.contains('main-content-container-list__item_teacher')){
+$('.container').load("public/views/maestro/AdminTeam/RegisterTeam.php", "data", function (response, status, request) {
+    this; // dom element
+    
+});
+}
+
+if(e.target.classList.contains('form-create-student-container-form-container__button_create-team')) {
+
+    let data={};
+
+    data.cod_team = $('#cod_team').val();
+    data.name_team = $('#name_team').val();
+
+    fetch('public/DataBase/SetTeam.php',{
+        method: 'POST',
+        headers: {'Content-Type':'application/x-www-form-urlencoded'}, 
+        body: JSON.stringify(data)
+       })
+       .then(function(response){
+        return response.json();
+       })
+       .then(function(jsonResponse){
+        $(".container").load("public/views/maestro/SuccessAlert/TeamAlert/SuccessTeam.php", "data", function (response, status, request) {
+              
+                
+        });
+    })
+    .catch((err) => {
+        console.log(err);    
+    })
+  
+}
+
+// registrar proyecto
+
+if(e.target.classList.contains('main-content-container-list__item__register-project')){
+    $('.container').load("public/views/maestro/AdminProject/RegisterProject.php", "data", function (response, status, request) {
+        
+        
+    });
+    }
+
+    // agregar activiades al proyecto
+        
+      
+    // let activitiesProject = {};
+    // let ArrayActivities = [];
+  
+    // if(e.target.classList.contains('btn-span')){
+      
+    //     if(e.target.previousElementSibling.value != "" && e.target.previousElementSibling.value.length > 5 ){
+    //         ArrayActivities.push(e.target.previousElementSibling.value)
+    //         cl
+    //         e.target.nextElementSibling.style.position="absolute";
+    //         e.target.nextElementSibling.style.top="-20px";
+    //         e.target.nextElementSibling.style.left="0";
+    //         e.target.nextElementSibling.style.marginLeft="16px";
+    //         e.target.nextElementSibling.style.color ="#448AFF";
+    //         e.target.nextElementSibling.innerText = "Actividad Agregada";
+
+           
+    //         setTimeout(() => {
+    //             e.target.nextElementSibling.innerText = "";
+    //         }, 2500);
+          
+    //     }else{
+    //         e.target.nextElementSibling.style.position="absolute";
+    //         e.target.nextElementSibling.style.top="-20px";
+    //         e.target.nextElementSibling.style.left="0";
+    //         e.target.nextElementSibling.style.marginLeft="16px";
+    //         e.target.nextElementSibling.style.color ="#757575";
+    //         e.target.nextElementSibling.innerText = "Nombre muy Corto";
+    //         $('#name_project').val('');
+    //         setTimeout(() => {
+    //             e.target.nextElementSibling.innerText = "";
+    //         }, 2500);
+         
+    //     }
+       
+       
+    // }
+
+   
+    let activitiesProject = {};
+
+    if(e.target.classList.contains('form-create-student-container-form-container__button_create-project')){
+       
+
+
+        // obtengo el nombre del proyecto
+        $('#name_project').val().length > 5 ? 
+        activitiesProject.name_project =  $('#name_project').val(): 
+         $('#name_project').prev().text('Ingrese un Nombre de Proyecto');
+        //  limpio la etiqueta de alerta
+        $('#name_project').val().length > 5 ? 
+        $('#name_project').prev().text(''):
+        null;
+
+
+        if($('#file').val() == 'false'){
+            $('#file').prev().text('Seleccione un tipo de Archivo')
+        }else{
+            $('#file').prev().text(''); 
+            activitiesProject.file = $("#file option:selected").text();
+        }
+
+        
+        if( $('#endDate').val() == ''){
+            $('#endDate').prev().text('Seleccione una Fecha')
+        }else{
+            $('#endDate').prev().text(''); 
+            activitiesProject.endDate =  $('#endDate').val()
+        }
+
+            activitiesProject.comments =  $('#comments').val()
+
+
+        if(Object.keys(activitiesProject).length == 4){
+
+            fetch('public/DataBase/SetProject.php',{
+                method: 'POST',
+                headers: {'Content-Type':'application/x-www-form-urlencoded'}, 
+                body: JSON.stringify(activitiesProject)
+               })
+               .then(function(response){
+                return response.json();
+               })
+               .then(function(jsonResponse){
+                $(".container").load("public/views/maestro/SuccessAlert/ProjectAlert/SuccessProject.php", "data", function (response, status, request) {
+                      
+                        
+                });
+            })
+            .catch((err) => {
+                console.log(err);    
+            })
+        
+        }
+
+       
+    }
+
+
+    // Avances del proyecto y evidencias
+
+
+
+
+
+  
+   
+
+
+
+
 
     })//fin addEventListener();
+
+
+
+
+
+    
 
     
     
