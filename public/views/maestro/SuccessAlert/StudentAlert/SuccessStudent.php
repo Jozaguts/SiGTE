@@ -6,5 +6,5 @@ session_start();
 $message=$_SESSION['alert'];
 
 $alert = new Alert;
-$link = array('CreateStudent','home') ;
+$link = array('maestro/AdminStudent/CreateStudent','home') ;
 $alert->getSuccessAlert($message, $link);

@@ -100,7 +100,8 @@ position: relative;
 .form-create-student-container-form-container__button, .form-assing-student-container-form-container__button,
 .form-assing-student-container-form-container__button__evalueStudent,
 .form-create-student-container-form-container__button_create-team,
-.form-create-student-container-form-container__button_create-project{ 
+.form-create-student-container-form-container__button_create-project,
+.form-create-student-container-form-container__button_get-evidence-project{ 
     width: 80vw;
     /* margin: auto; */
     min-height: 50px;
@@ -181,7 +182,57 @@ tr >td {
     right: 0;
 
 }
+.datagrid-informe{
+    display: grid;
+    grid-template-columns: 45vw 45vw;
+    /* width: 80vh; */
+    text-transform: capitalize;
 
+}
+.column-tags{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+
+}
+.column-tags > h3{
+    display: block;
+    width: fit-content;
+    color: var(--secondary-text-color);
+    margin: .3rem;
+    font-size: 1rem;
+} 
+.column-info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+.column-info >h3 {
+margin: .3rem;
+font-size: 1rem;
+color: var(--primary-text-color);
+} 
+.input-container > h1{
+    text-align: center;
+}
+
+.btn-info{
+    width: 40vw;
+    /* margin: auto; */
+    min-height: 50px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--secondary-text-color);
+    text-decoration: none;
+    color: var(--primary-text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 
 

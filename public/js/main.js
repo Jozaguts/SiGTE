@@ -609,8 +609,119 @@ if(e.target.classList.contains('main-content-container-list__item__register-proj
 
     // Avances del proyecto y evidencias
 
+    if(e.target.classList.contains('main-content-container-list__item__advances-project')){
+        $('.container').load("public/views/maestro/AdminProject/ProjectEvidence.php", "data", function (response, status, request) {
+            
+            
+        });
+        }
+
+        $('#proyectoEvidence').change(function (e) { 
+            e.preventDefault();
+
+            let id = this.value;
+
+            fetch('public/DataBase/AdvancesEvidenceProject.php',{
+                method: 'POST',
+                headers: {'Content-Type':'application/x-www-form-urlencoded'}, 
+                body: JSON.stringify(id)
+               })
+               .then(function(response){
+                return response.json();
+               })
+               .then(function(jsonResponse){
+                   if(jsonResponse == 'No hay Actividades'){
+                    alert('asas');
+                   }else{
+
+                    jsonResponse.forEach(element => {
+
+                        let option = document.createElement('option');
+                        option.setAttribute('value', `${element.id_activity}`)
+                        option.innerText = `${element.name_activity}`;
+
+                        $('#activityEvidence').append(option);
+                   
+                         
+                        });
+                   }
+                  
+              
+                // 
+
+                
+            })
+            .catch((err) => {
+                console.log(err);    
+            })
+
+            
+            
+        });
+
+        let advanceofactivitiesProject = {};
+        if(e.target.classList.contains('form-create-student-container-form-container__button_get-evidence-project')){
+
+            if($('#proyectoEvidence').val() == 'false'){
+                $('#proyectoEvidence').prev().text('Seleccione un Proyecto')
+            }else{
+                $('#proyectoEvidence').prev().text(''); 
+                advanceofactivitiesProject.id_project = $("#proyectoEvidence option:selected").val();
+            }
+            if($('#activityEvidence').val() == 'false'){
+                $('#activityEvidence').prev().text('Seleccione una actividad')
+            }else{
+                $('#activityEvidence').prev().text(''); 
+                advanceofactivitiesProject.id_activity = $("#activityEvidence option:selected").val();
+            }
+    
+         if(Object.keys(advanceofactivitiesProject).length == 2){
+
+             fetch('public/database/AdvanceEvidenceInfo.php',{
+                 method: "POST",
+                  headers: {'Content-Type':'application/x-www-form-urlencoded'}, 
+                    body: JSON.stringify(advanceofactivitiesProject)
+             })
+             .then(function(e){
+                return e.json();
+             })
+             .then(function(eJson){
+                eJson.forEach(function(e){
+                    
+                    let file = document.createElement('h3')
+                    let status = document.createElement('h3')
+                    let user = document.createElement('h3')
+                    let team = document.createElement('h3')
+                    let button = document.createElement('a');
+                    button.setAttribute('href',`${e.url}`)
+                    button.target ='_blank';
+                    button.innerText = "Descargar";
+
+                    button.classList.add('btn-info') 
+
+                    team.innerText= e.name_team;
+                    user.innerText=e.username;
+                    status.innerText= e.status_activity
+                    file.innerText=e.file
+                    $('.column-info').html("");
+                    $('.column-info').append(team);
+                    $('.column-info').append(user);
+                    $('.column-info').append(status);
+                    $('.column-info').append(file);
+                    $('#buttonTable').html("");
+                    $('#buttonTable').append(button)
+                
+                    
+                    
 
 
+                })
+                
+               
+             })          
+         }
+   
+        }
 
 
   
