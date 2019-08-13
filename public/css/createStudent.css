@@ -23,7 +23,7 @@
 .form-create-student-container__form {
     height: 90vh;
     display: grid;
-    grid-template-rows: 80% 20%;
+    grid-template-rows: 85% 15%;
     background-color:var(--dark-primary-color);
 }
 .form-create-student-container-form__title {
@@ -232,6 +232,9 @@ color: var(--primary-text-color);
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.data-student > .input-container > input {
+    min-height: 40px !important;
 }
 
 

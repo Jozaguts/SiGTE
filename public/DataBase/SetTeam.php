@@ -9,8 +9,9 @@ $teams = new Teams;
 
 $cod_team  = $_POST['cod_team'];
 $name_team = $_POST['name_team'];
+$max_students = $_POST['max_students'];
 
 
-$teams->setTeam($cod_team,$name_team);
+$teams->setTeam($cod_team,$name_team,$max_students);
  
 

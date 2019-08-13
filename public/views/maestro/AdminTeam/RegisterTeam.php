@@ -25,9 +25,14 @@ echo '<div class="form-create-student-container">
             </div>
             <div class="input-container">
                 <small class="small-name">   </small>
-                <input type="text" name="name_team" id="name_team" placeholder="Nombre de Eqipo">
+                <input type="text" name="name_team" id="name_team" placeholder="Nombre de Equipo">
                 <small class="small-message">   </small>
             </div>
+            <div class="input-container">
+            <small class="small-name">   </small>
+            <input type="number" name="max_students" id="max_students" placeholder="Numero Máximo de Estudiantes">
+            <small class="small-message">   </small>
+        </div>
          
         </div>
         

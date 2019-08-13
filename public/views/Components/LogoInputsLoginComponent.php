@@ -15,6 +15,7 @@ class LogoInputsLoginComponent{
     
     protected $tipoUser = array(0 => 'Maestro' ,1=>'Lider De Equipo', 2 => 'Miembro De Equipo' );
     const APP_NAME = 'SiGTE';
+    // '.$this->tipoUser[$nivel].'
     public function getComponents($nivel ){
        
         
@@ -25,7 +26,7 @@ class LogoInputsLoginComponent{
                         </div>
                         <div class="login-logo-container__title">
                             <h1 class="logo-footer-title">'.self::APP_NAME.'</h1>
-                            <small class="logo-footer-sub-title">'.$this->tipoUser[$nivel].'</small>
+                            <small class="logo-footer-sub-title"></small>
                         </div>  
                     </div>
                     <div class="login-form-container">

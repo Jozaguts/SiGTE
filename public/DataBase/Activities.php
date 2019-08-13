@@ -12,7 +12,7 @@ class Activities {
         $connection = new Conection;
         
         // consulta solo para traer los alumnos que no has sido asignados y al maestro TODOS ESTAN EN LA TABLA USER
-        $query="SELECT id_activity, name_activity from activity where  id_project = $idProject;";
+        $query="SELECT id_activity, name_activity, status_activity from activity where  id_project = $idProject;";
     //    se ejecuta la consulta si falla se mata el proceso
         $response = mysqli_query($connection->Connect(), $query) or die("Error de Consulta" . mysqli_error($connection->Connect()));
         // obtengo el numero de columnas de la respuesta que da la base de datos
@@ -30,6 +30,7 @@ class Activities {
 
                 array_push($activities, array(
                     "id_activity" => $row['id_activity'],
+                    "status_activity" => $row['status_activity'],
                     "name_activity" => $row['name_activity']
                 ));
         

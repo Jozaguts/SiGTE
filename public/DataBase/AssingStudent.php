@@ -8,7 +8,7 @@ $students = new Students;
 $res = $students->assingStudent($_POST);
 
 echo $res;
-
+ 
 
 // ESTA ES LA RESPUSTA JSON NO BORRAR
 // echo json_encode($_POST);

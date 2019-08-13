@@ -12,12 +12,12 @@ session_start();
 $user_type = $_SESSION['user_type_id'];
 
 $header = new Header;
-$header->getHeader('Evaluar Alumno');
+$header->getHeader('Menú');
 
 
 // obtengo los estudiantes que no tengan equipo asignado
 $students = new Students;
-$arrayResponse= $students->getStudentsWithAssignedActivities();
+$arrayResponse= $students->getStudents();
 
 // // obtengo los proyectos
 // $projects = new Projects;
@@ -34,7 +34,7 @@ echo '<div class="form-create-student-container">
 
         <div class="form-create-student-container-form__inputs-container">
 
-        <h2 class="form-create-student-container-form__title">Activiades Asignadas</h2>
+        <h2 class="form-create-student-container-form__title">Editar Alumno</h2>
 
             <div class="input-container">
                 <small class="small-name">   </small>
@@ -46,27 +46,10 @@ echo '<div class="form-create-student-container">
                 echo'</select>
                 <small class="small-message">   </small>
             </div>
-            <table>
-            <thead>
-                <tr>
-                <th>Nombre de la Actividad</th>
-                <th>Completada</th>
-                <th>Calificacón</th>
-                </tr>
-            </thead>
-            <tbody id="tbody";>
-            
-            </tbody>
-            
-            </table>
+            <div class="data-student">
             
             
-            </table>
-
-            
-            
-            
-            
+            </div>
         </div>
         
         <div class="form-create-student-container-form-button-container">

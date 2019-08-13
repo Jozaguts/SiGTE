@@ -82,7 +82,7 @@ class Projects {
     mysqli_close($connection->Connect());
 }
 
-        public function setProject($dataProject){
+    public function setProject($dataProject){
 
             $comment = $dataProject['comments'];
             $currentDate = date("Y/m/d");
@@ -91,12 +91,6 @@ class Projects {
             $file = $dataProject['file'];
             $name_project = $dataProject['name_project'];
             $score =0;
-
-
-
-
-
-
 
 
         $connection = new Conection;

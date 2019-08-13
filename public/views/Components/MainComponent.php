@@ -9,7 +9,7 @@ class  MainComponent{
         switch ($user_type) {
             
             case 1:
-            $listActivitys = array( 0=> 'Alta de Alumno',1=>'Asignar Alumno',2=>'Evaluar Alumno');
+            $listActivitys = array( 0=> 'Alta de Alumno',1=>'Asignar Alumno',2=>'Editar Alumno');
                 $generateActivities = $this->generateActivities($listActivitys);
                 break;
             case 2:
@@ -30,7 +30,8 @@ class  MainComponent{
         echo '<ul class="main-content-container__list">';
             for ($i=0; $i <count($listActivitys); $i++) { 
                 $class = str_replace(" ", "-", $listActivitys[$i]);
-        echo '<li class="main-content-container-list__item '.$class.'">'.$listActivitys[$i].'</li>';
+                $event = str_replace(" ", "", $listActivitys[$i]);
+        echo '<li class="main-content-container-list__item '.$class.' onclick='.$event.'()">'.$listActivitys[$i].'</li>';
       }
       echo'</ul>';
       echo '</main>';

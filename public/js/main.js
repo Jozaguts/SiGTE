@@ -1,10 +1,12 @@
-$(document).ready(function () {
+// $(document).ready(function () {
 
 
     let idsession = document.querySelector('input[type="hidden"]');
+
+    
        
         function goBack(){
-            if(idsession.getAttribute('data-session') != ""){
+            // if(idsession.getAttribute('data-session') != ""){
                 let type = parseInt(idsession.getAttribute('data-session'))
                
                 switch (type) {
@@ -26,14 +28,13 @@ $(document).ready(function () {
                         console.log('No Hay Sesion Iniciada');
                         break;
                 }
-        
-          
-            }else{
-              
-            }
            
         }
-        goBack();
+        if(idsession != 100){
+            goBack();
+        }else{
+            // return false;
+        }
   
 
     // URLS
@@ -50,7 +51,7 @@ $(document).ready(function () {
             if( logOut()== 'Sesión Cerrada'){
                 console.log('Sesión Cerrada');
             }else{
-                return false;
+                // return false;
             }
 
          
@@ -60,7 +61,7 @@ $(document).ready(function () {
         if(e.target.classList.contains('btn-login')) {
             
             let tipoUser = e.target.getAttribute('data-tipouser');
-            console.log(tipoUser);
+            
             switch (tipoUser) {
                 case '1':
                     goTo(MAESTRO);
@@ -80,7 +81,7 @@ $(document).ready(function () {
 
         // icon regresar en el login
         if(e.target.classList.contains('icon-row-left')) {   
-        goBack();
+            goBack();
         }
 
 
@@ -139,7 +140,7 @@ $(document).ready(function () {
                             default:
                                 break;
                         }
-                       
+                       return false;
                        })
                        .catch(function(error) {
                         console.log('Hubo un problema con la petición Fetch:' + error.message);
@@ -206,7 +207,7 @@ document.getElementsByTagName('head')[0].appendChild(linkElement);
            data.forEach(element => {
             jsonData[element.name] = element.value;
            });
-           console.log(jsonData);
+
           
     
            fetch('public/DataBase/CreateStudent.php',{
@@ -268,7 +269,7 @@ document.getElementsByTagName('head')[0].appendChild(linkElement);
     if(e.target.classList.contains('Asignar-Alumno')){
 
         $('.container').load('public/views/maestro/AdminStudent/AssignStudent.php', function (response, status, request) {
-            this; // dom element
+           
             
         });
     }
@@ -276,7 +277,7 @@ document.getElementsByTagName('head')[0].appendChild(linkElement);
 
 
         let selects = document.querySelectorAll('select');
-// console.log(selects);
+
         selects.forEach(select => {
           if(select.options[select.selectedIndex].value == 'false'){
             select.nextElementSibling.innerText = 'Seleccione Una Opción';
@@ -296,7 +297,7 @@ document.getElementsByTagName('head')[0].appendChild(linkElement);
             data.id_project =$("#proyecto").find(":selected").val();
             data.id_team =$("#equipo").find(":selected").val();
             data.leader= $("input[name=leader]:checked").val()==undefined? data.leader='false':data.leader= $("input[name=leader]:checked").val();
-            console.log(data)
+       
             // data.request= 'assingStudent';
 
             fetch('public/DataBase/AssingStudent.php',{
@@ -306,7 +307,6 @@ document.getElementsByTagName('head')[0].appendChild(linkElement);
                }).then(function(res){
                 return res.json();
                }).then(function(res){
-
                 $(".container").load("public/views/maestro/SuccessAlert/StudentAlert/SuccessStudent.php", "data", function (response, status, request) {
               
                 
@@ -321,9 +321,9 @@ document.getElementsByTagName('head')[0].appendChild(linkElement);
     
  // evaluar alumno
 
- if(e.target.classList.contains('Evaluar-Alumno')){
+ if(e.target.classList.contains('Editar-Alumno')){
 
-    $('.container').load('public/views/maestro/AdminStudent/EvalueStudent.php', function (response, status, request) {
+    $('.container').load('public/views/maestro/AdminStudent/EditStudent.php', function (response, status, request) {
         this; // dom element
         
     });
@@ -338,45 +338,212 @@ document.getElementsByTagName('head')[0].appendChild(linkElement);
  // estoy fuera del if
  $('.getWithActivitys').on('change', function(e) {
     e.stopPropagation();
-    id = this.value
+    userId = this.value
+    data ={
+        getInfo:userId
+    }
 
  
-    fetch('public/DataBase/EvalueStudent.php',{
+    fetch('public/DataBase/EditStudent.php',{
         method: 'POST',
         headers: {'Content-Type':'application/x-www-form-urlencoded'}, 
-        body: JSON.stringify(id)
+        body: JSON.stringify(data)
        })
        .then(function(res) {
             return res.json();  
         })
        .then(function (resJson) {
+      
+
+       resJson.forEach(function(datoStudent, index){
+
+        
+        $('.data-student').html('');
+        // ######### 1 nombre
+        let small = document.createElement('small');
+        let input= document.createElement('input');
+        let hidden = document.createElement('input');
+        hidden.setAttribute('type','hidden');
+        hidden.setAttribute('value',`${datoStudent.user_id}`);
+        
+        let secondsmall = document.createElement('small');
+        let div = document.createElement('div');
+
+        small.innerText = `${Object.keys(datoStudent)[0]}`
+        input.setAttribute('placeholder',`${datoStudent['Nombre']}`);
+        input.setAttribute('value',`${datoStudent['Nombre']}`);
+        input.innerText =datoStudent['Nombre']
        
-        // let tr = document.createElement('tr');
-        resJson.forEach(function(row ,index){
-             index = document.createElement('tr');
-                let td1 = document.createElement('td')
-                let td2 = document.createElement('td')
-                let td3 = document.createElement('td')
-                let input = document.createElement('input')
-                input.setAttribute('type','number');
-                input.setAttribute('data-userid',`${row.id_user}`);
-                input.setAttribute('data-activity',`${row.id_activity}`);
-                input.setAttribute('class','input-table');
-                row.score==null?row.score=0:row.score==row.score;
-                input.setAttribute('placeholder',row.score);
+    
+       
+        div.classList.add('input-container')
+        div.appendChild(small)
+        div.appendChild(input)
+        div.appendChild(secondsmall)
+        div.appendChild(hidden)
+       
+        $('.data-student').append(div);
+
+        // ######### 2 Apellido Paterno    
+        let small2 = document.createElement('small');
+        let input2= document.createElement('input');
+        let secondsmall2 = document.createElement('small');
+        let div2 = document.createElement('div');
+
+        small2.innerText = `${Object.keys(datoStudent)[1]}`
+        input2.setAttribute('placeholder',`${datoStudent['Apellido Paterno']}`);
+        input2.setAttribute('value',`${datoStudent['Apellido Paterno']}`);
+        input2.innerText =datoStudent['Apellido Paterno']
+        div2.classList.add('input-container')
+
+
+        div2.appendChild(small2)
+        div2.appendChild(input2)
+        div2.appendChild(secondsmall2)
+        
+        $('.data-student').append(div2);
+
+    // ######### 3 Apellido Materno   
+    let small3 = document.createElement('small');
+    let input3= document.createElement('input');
+    let secondsmall3 = document.createElement('small');
+    let div3 = document.createElement('div');
+
+    small3.innerText = `${Object.keys(datoStudent)[2]}`
+    input3.setAttribute('placeholder',`${datoStudent['Apellido Materno']}`);
+    input3.setAttribute('value',`${datoStudent['Apellido Materno']}`);
+    input3.innerText =datoStudent['Apellido Materno']
+    div3.classList.add('input-container')
+
+
+    div3.appendChild(small3)
+    div3.appendChild(input3)
+    div3.appendChild(secondsmall3)
+    
+    $('.data-student').append(div3);
+       
+       // ######### 4 Tipo De Usuario   
+       let small4 = document.createElement('small');
+       let input4= document.createElement('input');
+       let secondsmall4 = document.createElement('small');
+       let div4 = document.createElement('div');
+       
+       small4.innerText = `${Object.keys(datoStudent)[6]}`
+       input4.setAttribute('type','number');
+       input4.setAttribute('placeholder',`${datoStudent['Tipo de Usuario']}`);
+       input4.setAttribute('value',`${datoStudent['Tipo de Usuario']}`);
+      
+       input4.innerText =datoStudent['Tipo de Usuario']
+       div4.classList.add('input-container')
+   
+   
+       div4.appendChild(small4)
+       div4.appendChild(input4)
+       div4.appendChild(secondsmall4)
+       
+       $('.data-student').append(div4);
+          
+
+       // ######### 5 Nombre De Usuario   
+       let small5 = document.createElement('small');
+       let input5= document.createElement('input');
+       let secondsmall5 = document.createElement('small');
+       let div5 = document.createElement('div');
+   
+       small5.innerText = `${Object.keys(datoStudent)[3]}`
+       input5.setAttribute('placeholder',`${datoStudent['Nombre de Usuario']}`);
+       input5.setAttribute('value',`${datoStudent['Nombre de Usuario']}`);
+       input5.innerText =datoStudent['Nombre de Usuario']
+       div5.classList.add('input-container')
+   
+   
+       div5.appendChild(small5)
+       div5.appendChild(input5)
+       div5.appendChild(secondsmall5)
+       
+       $('.data-student').append(div5);
+       // ######### 5 Contrseña De Usuario   
+       let small6 = document.createElement('small');
+       let input6= document.createElement('input');
+       input6.setAttribute('type','password');
+       let secondsmall6 = document.createElement('small');
+       let div6 = document.createElement('div');
+      console.log(datoStudent);
+       small6.innerText = `${Object.keys(datoStudent)[7]}`
+       input6.setAttribute('placeholder',`${datoStudent['Contraseña']}`);
+       input6.setAttribute('value',`${datoStudent['Contraseña']}`);
+       input6.innerText =datoStudent['Contraseña']
+       div6.classList.add('input-container')
+   
+   
+       div6.appendChild(small6)
+       div6.appendChild(input6)
+       div6.appendChild(secondsmall6)
+       
+       $('.data-student').append(div6);
+
+        // 
+
+    //     $('.data-student').html(`
+        
+    //     <div class="input-container">
+    //     <small class="small-name">Nombre   </small>
+    //     <input type="text" name="name" id="name" placeholder="${datoStudent.name}"required>
+    //     <small class="small-message">   </small>
+    //     </div>
+    // <div class="input-container">
+    //     <small class="small-name">Apellido Paterno   </small>
+    //     <input type="text" name="paternal_name" id="paternal_name" placeholder="${datoStudent.paternal_name}"  required>
+    //     <small class="small-message">   </small>
+    // </div>
+    // <div class="input-container">
+    //     <small class="small-name"> Apellido Materno  </small>
+    //     <input type="text" name="maternal_name" id="maternal_name" placeholder="${datoStudent.maternal_name}"  required>
+    //     <small class="small-message">   </small>
+    // </div>
+    // <div class="input-container">
+    //     <small class="small-name">Tipo De Usuario   </small>
+    //     <input type="text" name="user_type_id" id="user_type_id" placeholder="${datoStudent.user_type_id}"  required>
+    //     <small class="small-message">   </small>
+    // </div>
+    // <div class="input-container">
+    //     <small class="small-name"> Nombre de Usuario  </small>
+    //     <input type="text" name="username" id="username" placeholder="${datoStudent.username}"  required>
+    //     <small class="small-message">   </small>
+    // </div>  
+
+    //     `)
+
+    
+
+       })
+
+        // // let tr = document.createElement('tr');
+        // resJson.forEach(function(row ,index){
+        //      index = document.createElement('tr');
+        //         let td1 = document.createElement('td')
+        //         let td2 = document.createElement('td')
+        //         let td3 = document.createElement('td')
+        //         let input = document.createElement('input')
+        //         input.setAttribute('type','number');
+        //         input.setAttribute('data-userid',`${row.id_user}`);
+        //         input.setAttribute('data-activity',`${row.id_activity}`);
+        //         input.setAttribute('class','input-table');
+        //         row.score==null?row.score=0:row.score==row.score;
+        //         input.setAttribute('placeholder',row.score);
   
     
                 
-            td1.innerText = row.name_activity;
-            $(index).append(td1);
-            td2.innerText = row.status_activity;
-            $(index).append(td2); 
-            $(td3).append(input); 
-            $(index).append(td3);
+        //     td1.innerText = row.name_activity;
+        //     $(index).append(td1);
+        //     td2.innerText = row.status_activity;
+        //     $(index).append(td2); 
+        //     $(td3).append(input); 
+        //     $(index).append(td3);
             
            
-            $('#tbody').append(index);
-        })
+        //     $('#tbody').append(index);
+        // })
       
  
 
@@ -391,22 +558,29 @@ document.getElementsByTagName('head')[0].appendChild(linkElement);
      
   });
 
-//   evaluar alumon mandar calificaicon
+//   evaluar alumno mandar calificaicon
 
 if(e.target.classList.contains('form-assing-student-container-form-container__button__evalueStudent')) {
     let inputs = document.querySelectorAll('input');
-    let arraydata=[];
-    inputs.forEach(function(input){
-        let data= {};
-        data.user_id = input.getAttribute('data-userid');
-        data.id_activity = input.getAttribute('data-activity');
-        data.score = input.value;
-        arraydata.push(data)
-    })
-    fetch('public/DataBase/SetScoreStudent.php',{
+ 
+    data= {
+        user_id:inputs[1].value,
+        name: inputs[0].value,
+        paternal_name: inputs[2].value,
+        maternal_name: inputs[3].value,
+        user_type_id: inputs[4].value,
+        username: inputs[5].value,
+        password: inputs[6].value,
+        edit:"true"
+    }
+   
+  
+ 
+    
+    fetch('public/DataBase/EditStudent.php',{
         method: 'POST',
         headers: {'Content-Type':'application/x-www-form-urlencoded'}, 
-        body: JSON.stringify(arraydata)
+        body: JSON.stringify(data)
        })
        .then(function(response){
         return response.json();
@@ -420,7 +594,6 @@ if(e.target.classList.contains('form-assing-student-container-form-container__bu
        })
 }
 
-
 // botones navbar maestro
 if(e.target.classList.contains('studens-icon_teacher')){
     e.stopPropagation();
@@ -428,7 +601,8 @@ if(e.target.classList.contains('studens-icon_teacher')){
     
     <li class="main-content-container-list__item Alta-de-Alumno "> Alta de Alumno</li>
     <li class="main-content-container-list__item Asignar-Alumno ">Asignar Alumno</li>
-    <li class="main-content-container-list__item Evaluar-Alumno ">Evaluar Alumno</li>
+  
+    <li class="main-content-container-list__item Editar-Alumno";">Editar Alumno</li>
     `);
 }
 
@@ -446,9 +620,7 @@ if(e.target.classList.contains('project-icon_teacher')){
     <li class="main-content-container-list__item main-content-container-list__item__register-project  "> Registrar Proyecto</li>
     <li class="main-content-container-list__item  main-content-container-list__item__advances-project">Avances y Evidencias del Proyecto</li>
     <li class="main-content-container-list__item main-content-container-list__item__evalute-project">Evaluar Proyecto</li>
-    <li class="main-content-container-list__item main-content-container-list__item__
-    10/5000
-    results-project">Resultados de Proyectos</li>
+    <li class="main-content-container-list__item main-content-container-list__item__results-project" id="resultados">Resultados de Proyectos</li>
     `);
 }
 
@@ -476,6 +648,7 @@ if(e.target.classList.contains('form-create-student-container-form-container__bu
 
     data.cod_team = $('#cod_team').val();
     data.name_team = $('#name_team').val();
+    data.max_students = $('#max_students').val();
 
     fetch('public/DataBase/SetTeam.php',{
         method: 'POST',
@@ -631,7 +804,7 @@ if(e.target.classList.contains('main-content-container-list__item__register-proj
                })
                .then(function(jsonResponse){
                    if(jsonResponse == 'No hay Actividades'){
-                    alert('asas');
+                    
                    }else{
 
                     jsonResponse.forEach(element => {
@@ -710,10 +883,6 @@ if(e.target.classList.contains('main-content-container-list__item__register-proj
                     $('.column-info').append(file);
                     $('#buttonTable').html("");
                     $('#buttonTable').append(button)
-                
-                    
-                    
-
 
                 })
                 
@@ -724,7 +893,106 @@ if(e.target.classList.contains('main-content-container-list__item__register-proj
         }
 
 
-  
+
+        if(e.target.innerText == "Evaluar Proyecto"){
+
+            $('.container').load("public/views/maestro/AdminProject/EvalueProject.php", "data", function (response, status, request) {
+            
+            });
+
+                let event = document.addEventListener('change',function(vnt){
+               
+                    if(vnt.target.classList.contains('select-eval-project')){
+                        let select = vnt.target;
+                        
+                        let id = select.options[select.selectedIndex].value
+                        fetch('public/database/EvalueProject.php',{
+                            method:'POST',
+                            headers: {'Content-Type':'application/x-www-form-urlencoded'}, 
+                            body: JSON.stringify(id)
+                        })
+                        .then(function(res){
+                            return res.json()
+                        })
+                         .then(function(resJson){
+                             if(resJson == "No hay Actividades"){
+                                $('#tbody').text('No Hay Actividades para Revisar');
+                             }
+                             
+                                
+                resJson.forEach(function(row ,index){
+
+
+            
+                index = document.createElement('tr');
+               let td1 = document.createElement('td')
+               let td2 = document.createElement('td')
+               let td3 = document.createElement('td')
+               let input = document.createElement('input')
+               input.setAttribute('type','number');
+               input.setAttribute('data-userid',`${row.id_user}`);
+               input.setAttribute('data-activity',`${row.id_activity}`);
+               input.setAttribute('class','input-table');
+               row.score==null?row.score=0:row.score==row.score;
+               input.setAttribute('placeholder',row.score);
+ 
+   
+               
+                td1.innerText = row.name_activity;
+                $(index).append(td1);
+                td2.innerText = row.status_activity;
+                $(index).append(td2); 
+                $(td3).append(input); 
+                $(index).append(td3);
+           
+          
+           $('#tbody').append(index);
+       })
+     
+
+                        })
+                        .catch((err) => {
+                            console.log(err)
+                        })
+                     
+                    }
+                })
+        }
+
+
+
+
+ 
+
+if(e.target.classList.contains('main-content-container-list__item__results-project')){
+
+    $('.container').load("public/views/maestro/AdminProject/ResultProject.php", "data", function (response, status, request) {
+            
+            
+    });
+
+}
+
+$('#projectResult').change(function (e) { 
+    
+    let id  = e.target.options[e.target.selectedIndex].value
+    fetch('public/database/GetActivitiesProject.php',{
+        method: "POST",
+        headers: {'Content-Type':'application/x-www-form-urlencoded'}, 
+        body: JSON.stringify(id)
+    })
+    .then(function(res){
+        return res.json()
+    })
+    .then(function(resJson){
+      
+    })
+
+
+
+    
+    e.preventDefault(); 
+});
    
 
 
@@ -782,12 +1050,13 @@ if(e.target.classList.contains('main-content-container-list__item__register-proj
    
 
 
+
+
+
+
+// });  //fin jq
+
 document.addEventListener('submit',function(e){
     e.preventDefault();
     e.stopPropagation();
 });
-
-
-
-
-});  //fin jq
