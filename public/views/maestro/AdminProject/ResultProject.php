@@ -10,11 +10,14 @@ $user_type = $_SESSION['user_type_id'];
 $header = new Header;
 $projects = new Projects;
 
-$arrayProjects =  $projects->getProjects();
+
+// Mostrar solo proyectos terminados status project == Done (D)
+
+$arrayProjects =  $projects->showProjectsDone();
 
 $header->getHeader('Menú');
 
-// $arrayFiles = array( 0 =>'PDF', 1=> 'DOC', 2=> '.EXE',3=>'EXCEL',4=>'POWER POINT');
+
 
 
 echo '<div class="form-create-student-container">
@@ -39,6 +42,26 @@ echo '<div class="form-create-student-container">
                 <small class="small-message">   </small>
             </div>
             <h1 class="form-create-student-container-form__title">Informe</h1>
+
+            <div class="datagrid-informe">
+                    
+            <div class="column-tags">
+                <h3 class="title"> Nombre del Proyecto </h3>
+                <h3 class="title"> Fecha Final De Entrega </h3>
+                <h3 class="title"> Equipo </h3>
+                <h3 class="title"> Lider de Equipo </h3>
+                <h3 class="title"> Calificación</h3>
+                
+            </div>
+            <div class="column-info" >
+      
+            </div>
+            
+
+    </div>   
+    <div class="input-container" id="buttonTable">
+    
+    </div>
 
           
          

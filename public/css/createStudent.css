@@ -97,6 +97,25 @@ position: relative;
      align-items: center;
      background-color: var(--default-primary-color);
  }
+ .container_edit{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--default-primary-color);
+}
+.container_edit > button{
+    width: 40vw;
+    /* margin: auto; */
+    min-height: 50px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--accent-color);
+    margin: .5rem;
+}
+.btn-delete{
+background-color: tomato !important;
+}
 .form-create-student-container-form-container__button, .form-assing-student-container-form-container__button,
 .form-assing-student-container-form-container__button__evalueStudent,
 .form-create-student-container-form-container__button_create-team,

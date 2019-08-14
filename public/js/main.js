@@ -342,6 +342,9 @@ document.getElementsByTagName('head')[0].appendChild(linkElement);
     data ={
         getInfo:userId
     }
+    $('.btn-delete').val(userId)
+   console.log($('.btn-delete'))
+   
 
  
     fetch('public/DataBase/EditStudent.php',{
@@ -482,71 +485,17 @@ document.getElementsByTagName('head')[0].appendChild(linkElement);
        
        $('.data-student').append(div6);
 
-        // 
-
-    //     $('.data-student').html(`
-        
-    //     <div class="input-container">
-    //     <small class="small-name">Nombre   </small>
-    //     <input type="text" name="name" id="name" placeholder="${datoStudent.name}"required>
-    //     <small class="small-message">   </small>
-    //     </div>
-    // <div class="input-container">
-    //     <small class="small-name">Apellido Paterno   </small>
-    //     <input type="text" name="paternal_name" id="paternal_name" placeholder="${datoStudent.paternal_name}"  required>
-    //     <small class="small-message">   </small>
-    // </div>
-    // <div class="input-container">
-    //     <small class="small-name"> Apellido Materno  </small>
-    //     <input type="text" name="maternal_name" id="maternal_name" placeholder="${datoStudent.maternal_name}"  required>
-    //     <small class="small-message">   </small>
-    // </div>
-    // <div class="input-container">
-    //     <small class="small-name">Tipo De Usuario   </small>
-    //     <input type="text" name="user_type_id" id="user_type_id" placeholder="${datoStudent.user_type_id}"  required>
-    //     <small class="small-message">   </small>
-    // </div>
-    // <div class="input-container">
-    //     <small class="small-name"> Nombre de Usuario  </small>
-    //     <input type="text" name="username" id="username" placeholder="${datoStudent.username}"  required>
-    //     <small class="small-message">   </small>
-    // </div>  
-
-    //     `)
+     
 
     
 
-       })
+    }) 
+    // termina el pintado en pantalla
 
-        // // let tr = document.createElement('tr');
-        // resJson.forEach(function(row ,index){
-        //      index = document.createElement('tr');
-        //         let td1 = document.createElement('td')
-        //         let td2 = document.createElement('td')
-        //         let td3 = document.createElement('td')
-        //         let input = document.createElement('input')
-        //         input.setAttribute('type','number');
-        //         input.setAttribute('data-userid',`${row.id_user}`);
-        //         input.setAttribute('data-activity',`${row.id_activity}`);
-        //         input.setAttribute('class','input-table');
-        //         row.score==null?row.score=0:row.score==row.score;
-        //         input.setAttribute('placeholder',row.score);
-  
+       
+
+   
     
-                
-        //     td1.innerText = row.name_activity;
-        //     $(index).append(td1);
-        //     td2.innerText = row.status_activity;
-        //     $(index).append(td2); 
-        //     $(td3).append(input); 
-        //     $(index).append(td3);
-            
-           
-        //     $('#tbody').append(index);
-        // })
-      
- 
-
           
         })
        .catch((err) => {
@@ -557,6 +506,40 @@ document.getElementsByTagName('head')[0].appendChild(linkElement);
 
      
   });
+
+  // BTN ELIMAR ALUMNO 
+$('.btn-delete').on('click',function(e){
+    
+
+let id = e.target.value;
+    let data = {
+        DeleteUser:"true",
+        id:id
+    }
+
+    fetch('public/DataBase/EditStudent.php',{
+        method: 'POST',
+        headers: {'Content-Type':'application/x-www-form-urlencoded'}, 
+        body: JSON.stringify(data)
+       })
+       .then(function(res) {
+            return res.json();  
+        })
+        .then((result) => {
+            $(".container").load("public/views/maestro/SuccessAlert/ProjectAlert/DeleteUser.php", "data", function (response, status, request) {
+              
+                
+            });
+        }).catch((err) => {
+            console.log(err);
+        })
+
+
+    console.log(data);
+})// aqui termina la eliminacion de usuarios (Alumno)
+
+
+
 
 //   evaluar alumno mandar calificaicon
 
@@ -758,7 +741,7 @@ data={
     .then((result) => {
         $(".container").load("public/views/maestro/SuccessAlert/ProjectAlert/SuccessProject.php", "data", function (response, status, request) {
                       
-                        
+          
         });
     }).catch((err) => {
         console.log(err)
@@ -936,7 +919,7 @@ if(e.target.classList.contains('main-content-container-list__item__register-proj
         if(e.target.classList.contains('form-create-student-container-form-container__button_get-evidence-project')){
 
 
-console.log($('#proyectoEvidence').val());
+            $('#proyectoEvidence').val()
             if($('#proyectoEvidence').val() == 'false'){
                 $('#proyectoEvidence').prev().text('Seleccione un Proyecto')
             }else{
@@ -1069,51 +1052,120 @@ console.log($('#proyectoEvidence').val());
 /* 
 obtengo los valores de cada input
  para actualizar la calificacion de las activiades 
-en un proyecto */
+en un proyecto y en id del proyecto*/
 if(e.target.classList.contains('main-content-container-list__item__results-project__button')){
 
+    let inputs = document.querySelectorAll('input');
+    let select = document.getElementById('evalueProject');
+    let option = select.options[select.selectedIndex].value;
+
+    let data=[];
  
-    // let inputs = document.querySelectorAll('input');
-    // let data=[];
-    // let dataOb={};
-    // console.log(inputs)
-    // inputs.forEach(function (param,index) {
-    //     dataOb[`id_activity${index}`] = param.getAttribute('data-activity')
-    //     dataOb[`value${index}`] = param.value;
-    //     data.push(dataOb);
-    //   })
-    //   console.log(data);
+    inputs.forEach(function (param) {
+        let dataOb={};
+        dataOb['id_activity'] = param.getAttribute('data-activity')
+        dataOb['score'] = param.value==""?param.value=0:param.value;
+        dataOb.id_project = option
+        data.push(dataOb);
+      })
+
+      let request = {
+          request: 'Update Project',
+          data: data
+      }
+      
+      console.log(request)
+      /* 
+guardo en DB los valores para Evaluar un proyecto 
+ID actividad con su calificacion y 
+ID Proyecto 
+Se modifica la calificacion en la tabla actividades
+ */
+
+      fetch('public/database/ProjectActions.php',{
+        method: 'POST',
+        headers:{'Content-Type': 'application/x-www-form-urlencoded'},
+        body:JSON.stringify(request)
+      })
+      .then((value) => {
+          return value.json()
+      })
+      .then((result) => {
+          console.log(result)
+          $(".container").load("public/views/maestro/SuccessAlert/ProjectAlert/SuccessProject.php", "data", function (response, status, request) {
+                      
+                        
+        });
+      }).catch((err) => {
+          console.log(err)
+      })
 
 
-// let inputs = $('td').find('input');
-// let data ={};
-// let arr = [];
+}
 
 
-// $.each(inputs, function (indexInArray, valueOfElement) { 
+/* 
+RESULTADO DEL PROYECTO
+*/
 
-//     data[`id_activity${indexInArray}`] = $(valueOfElement).attr('data-activity')
-//     data[`value'${indexInArray}`] = $(valueOfElement).val();
-//     arr.push(data); 
-
-// });
-// console.log(arr);
+if(e.target.classList.contains('main-content-container-list__item__results-project')){
+    $('.container').load("public/views/maestro/AdminProject/ResultProject.php", "data", function (response, status, request) {
+            
+    });
+   
 }
 
 
 $('#projectResult').change(function (e) { 
     
-    let id  = e.target.options[e.target.selectedIndex].value
-    fetch('public/database/GetActivitiesProject.php',{
+    let id_project = e.target.options[e.target.selectedIndex].value;
+    console.log(id_project);
+
+    let request = {
+        infoProjectDone: "true",
+        id_project:id_project
+    }
+
+    fetch('public/database/ProjectActions.php',{
         method: "POST",
         headers: {'Content-Type':'application/x-www-form-urlencoded'}, 
-        body: JSON.stringify(id)
+        body: JSON.stringify(request)
     })
     .then(function(res){
         return res.json()
     })
     .then(function(resJson){
-      
+      console.log(resJson);
+      resJson.forEach(function(e){
+                    
+        let nameProject = document.createElement('h3')
+        let endDate = document.createElement('h3')
+        let score = document.createElement('h3')
+        let teamProject = document.createElement('h3')
+        let leaderProject = document.createElement('h3')
+
+        let button = document.createElement('a');
+        button.setAttribute('href',`${e.final_file_project}`)
+        button.target ='_blank';
+        button.innerText = "Descargar";
+
+        button.classList.add('btn-info') 
+
+        nameProject.innerText= e.name_project
+        endDate.innerText=e.end_date_project
+        score.innerText= e.score
+        teamProject.innerText=e.name_team
+        leaderProject.innerText=e.username
+        $('.column-info').html("");
+        $('.column-info').append(nameProject);
+        $('.column-info').append(endDate);
+        $('.column-info').append(teamProject);
+        $('.column-info').append(leaderProject);
+        $('.column-info').append(score);
+        $('#buttonTable').html("");
+        $('#buttonTable').append(button)
+
+    })
     })
 
 

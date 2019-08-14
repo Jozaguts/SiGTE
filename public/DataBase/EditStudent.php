@@ -32,8 +32,22 @@ if(isset($_POST['edit'])){
     $dataUser = $_POST;
 
     $students->updateUser($dataUser); /* <-- Edito */
-  ; /* <-- aqui solo la obtengo lo pinto con JS */
+   /* <-- aqui solo la obtengo lo pinto con JS */
 }
+
+
+
+if(isset($_POST['DeleteUser'])){
+  $id = $_POST['id'];
+
+  $students->deleleStudent($id);
+
+}
+
+
+
+
+
 
 
 

@@ -1,16 +1,19 @@
-<?php
-require './../../autoload.php';
+<?php namespace Lider;
+// requiero el auto cargador de clases
+require '../../autoload.php';
 require './../../../Database/Teams.php';
-use DataBase\Teams;
-use Components\Header;
-
 session_start();
 $user_type = $_SESSION['user_type_id'];
+
+use Components\Header;
+use DataBase\Teams;
+
 $header = new Header;
+$teams = new Teams;
 
 $header->getHeader('Menú');
 
-$teams = new Teams;
+
 $arrayteams = $teams->getTeams();
 
 echo '<div class="form-create-student-container">
@@ -18,7 +21,7 @@ echo '<div class="form-create-student-container">
 
         <div class="form-create-student-container-form__inputs-container">
 
-            <h2 class="form-create-student-container-form__title">Asignar Equipo a Proyecto</h2>
+            <h2 class="form-create-student-container-form__title">Asignar Actividades</h2>
 
             <div class="input-container">
                 <small class="small-name">   </small>

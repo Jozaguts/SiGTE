@@ -338,6 +338,43 @@ class Students {
 
 
     }
+    public function deleleStudent($id){
+     
+
+   
+        $user_id = (int)$id;
+     
+        $con = new Conection;
+        
+        $query ="DELETE from `user` where `user_id` = $user_id";
+
+        $response = mysqli_query($con->Connect(),$query) or die("Error en la consulta". mysqli_error($con->Connect()));
+
+  
+        if($response==0){
+
+            $message = "No Se Elimino El Alumno";
+            session_start();
+            $_SESSION['alert']=$message;
+
+            echo json_encode($message);
+
+            mysqli_close($con->Connect());
+
+        }else{
+            $message = "Se Elimno Alumno Exitosamente";
+            session_start();
+            $_SESSION['alert']=$message;
+
+            echo json_encode($message);
+
+            mysqli_close($con->Connect());
+        }
+
+
+
+
+    }
 
 
 

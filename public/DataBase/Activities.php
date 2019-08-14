@@ -110,4 +110,44 @@ class Activities {
         mysqli_close($connection->Connect());
     }
 
+    public function updateAcitivitySetScoreByProject($data){
+        // var_dump($data[0]);
+
+        foreach ($data as $key => $value) {
+            
+            $id_activity = $value['id_activity'];
+            $id_project = $value['id_project'];
+            $score = $value['score'];
+
+
+            (int)$id_activity;
+            (int)$id_project;
+            (int)$score;
+
+            $con = new Conection;
+
+            $query ="UPDATE activity SET score = $score WHERE id_project = $id_project and id_activity = $id_activity;";
+
+
+            $respose  =  mysqli_query($con->Connect(), $query) or die ("Error de Consulta" . mysqli_error($con->Connect()));
+
+            if($respose==0){
+                $message = " NO hay datos Modificado";
+                echo json_encode($message);
+                mysqli_close($con->Connect());
+            }else{
+                
+          
+            }
+
+        }
+        $message = " Actividad Evaluada Con Exito";
+        session_start();
+        $_SESSION['alert'] = $message;
+        echo json_encode($message);
+        mysqli_close($con->Connect());
+
+
+    }
+
 }

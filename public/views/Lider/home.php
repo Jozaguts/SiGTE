@@ -21,5 +21,7 @@ $navBar= new NavbarComponent;
 $navBar->getNavbar($user_type);
 // implemeto metodos
 $main->getMain($user_type);
+
+
 $footer->getMainFooter($user_type);
 

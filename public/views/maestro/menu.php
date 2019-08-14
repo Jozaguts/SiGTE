@@ -14,4 +14,4 @@ $footer= new Footer;
 
 // implemeto metodos
 $footer->getfooter();
-$navBar->getNavbar();
+$navBar->getNavbar("");

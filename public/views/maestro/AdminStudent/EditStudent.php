@@ -52,8 +52,9 @@ echo '<div class="form-create-student-container">
             </div>
         </div>
         
-        <div class="form-create-student-container-form-button-container">
-        <button class="form-assing-student-container-form-container__button__evalueStudent" id="evalueStudent">Aceptar</button>
+        <div class="container_edit ">
+        <button class="form-assing-student-container-form-container__button__evalueStudent" id="evalueStudent">Modificar</button>
+        <button class="btn-delete">Eliminar</button>
         </div>
     </form>
     </div>';

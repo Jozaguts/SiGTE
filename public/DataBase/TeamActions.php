@@ -10,6 +10,7 @@ use DataBase\Projects;
 Sí pasa la validacion busco en base de datos los proyectos que no tengas equipo asignado
 no busco directamete en este archivo aquí mando a llamar a la funcions que se encarga de ello
  */
+
 if( isset($_POST['selectforGetProjects']) ){
     
     $projects = new Projects;
