@@ -11,7 +11,7 @@ $header = new Header;
 $header->getHeader('Menú');
 
 $project = new Projects;
-$arrayProjects = $project->getProjects();
+$arrayProjects = $project->getProjectswithActivities();
 
 echo '<div class="form-create-student-container">
     <form class="form-create-student-container__form">
@@ -38,7 +38,7 @@ echo '<div class="form-create-student-container">
             <thead>
                 <tr>
                 <th>Nombre de la Actividad</th>
-                <th>Completada</th>
+                <th>Estado</th>
                 <th>Calificacón</th>
                 </tr>
             </thead>
@@ -58,7 +58,7 @@ echo '<div class="form-create-student-container">
      
         
         <div class="form-create-student-container-form-button-container">
-            <button class="form-create-student-container-form-container__button_get-evidence-project ">Aceptar</button>
+            <button class="main-content-container-list__item__results-project__button">Aceptar</button>
         </div>
     </form>
     </div>';

@@ -935,6 +935,8 @@ if(e.target.classList.contains('main-content-container-list__item__register-proj
         let advanceofactivitiesProject = {};
         if(e.target.classList.contains('form-create-student-container-form-container__button_get-evidence-project')){
 
+
+console.log($('#proyectoEvidence').val());
             if($('#proyectoEvidence').val() == 'false'){
                 $('#proyectoEvidence').prev().text('Seleccione un Proyecto')
             }else{
@@ -999,7 +1001,9 @@ if(e.target.classList.contains('main-content-container-list__item__register-proj
             $('.container').load("public/views/maestro/AdminProject/EvalueProject.php", "data", function (response, status, request) {
             
             });
+// hasta aqui se carga la página
 
+// se detecta el evento de selelct para mostrar las activiades
                 let event = document.addEventListener('change',function(vnt){
                
                     if(vnt.target.classList.contains('select-eval-project')){
@@ -1018,36 +1022,36 @@ if(e.target.classList.contains('main-content-container-list__item__register-proj
                              if(resJson == "No hay Actividades"){
                                 $('#tbody').text('No Hay Actividades para Revisar');
                              }
+                             else{
+                               
+                                $('#tbody').text('');
+                                resJson.forEach(function(row ,index){
+                                   
+                                    index = document.createElement('tr');
+                                   let td1 = document.createElement('td')
+                                   let td2 = document.createElement('td')
+                                   let td3 = document.createElement('td')
+                                   let input = document.createElement('input')
+                                   input.setAttribute('type','number');
+                                   input.setAttribute('data-userid',`${row.id_user}`);
+                                   input.setAttribute('data-activity',`${row.id_activity}`);
+                                   input.setAttribute('class','input-table');
+                                   row.score==null?row.score=0:row.score==row.score;
+                                   input.setAttribute('placeholder',row.score);
+                     
+                                    td1.innerText = row.name_activity;
+                                    $(index).append(td1);
+                                    td2.innerText = row.status_activity;
+                                    $(index).append(td2); 
+                                    $(td3).append(input); 
+                                    $(index).append(td3);
+                       
+                               $('#tbody').append(index);
                              
-                                
-                resJson.forEach(function(row ,index){
-
-
-            
-                index = document.createElement('tr');
-               let td1 = document.createElement('td')
-               let td2 = document.createElement('td')
-               let td3 = document.createElement('td')
-               let input = document.createElement('input')
-               input.setAttribute('type','number');
-               input.setAttribute('data-userid',`${row.id_user}`);
-               input.setAttribute('data-activity',`${row.id_activity}`);
-               input.setAttribute('class','input-table');
-               row.score==null?row.score=0:row.score==row.score;
-               input.setAttribute('placeholder',row.score);
- 
-   
-               
-                td1.innerText = row.name_activity;
-                $(index).append(td1);
-                td2.innerText = row.status_activity;
-                $(index).append(td2); 
-                $(td3).append(input); 
-                $(index).append(td3);
-           
-          
-           $('#tbody').append(index);
-       })
+                           })
+                             }
+                             
+         
      
 
                         })
@@ -1062,16 +1066,40 @@ if(e.target.classList.contains('main-content-container-list__item__register-proj
 
 
 
+/* 
+obtengo los valores de cada input
+ para actualizar la calificacion de las activiades 
+en un proyecto */
+if(e.target.classList.contains('main-content-container-list__item__results-project__button')){
+
  
+    // let inputs = document.querySelectorAll('input');
+    // let data=[];
+    // let dataOb={};
+    // console.log(inputs)
+    // inputs.forEach(function (param,index) {
+    //     dataOb[`id_activity${index}`] = param.getAttribute('data-activity')
+    //     dataOb[`value${index}`] = param.value;
+    //     data.push(dataOb);
+    //   })
+    //   console.log(data);
 
-if(e.target.classList.contains('main-content-container-list__item__results-project')){
 
-    $('.container').load("public/views/maestro/AdminProject/ResultProject.php", "data", function (response, status, request) {
-            
-            
-    });
+// let inputs = $('td').find('input');
+// let data ={};
+// let arr = [];
 
+
+// $.each(inputs, function (indexInArray, valueOfElement) { 
+
+//     data[`id_activity${indexInArray}`] = $(valueOfElement).attr('data-activity')
+//     data[`value'${indexInArray}`] = $(valueOfElement).val();
+//     arr.push(data); 
+
+// });
+// console.log(arr);
 }
+
 
 $('#projectResult').change(function (e) { 
     

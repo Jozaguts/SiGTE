@@ -101,7 +101,9 @@ position: relative;
 .form-assing-student-container-form-container__button__evalueStudent,
 .form-create-student-container-form-container__button_create-team,
 .form-create-student-container-form-container__button_create-project,
-.form-create-student-container-form-container__button_get-evidence-project
+.form-create-student-container-form-container__button_get-evidence-project,
+.form-create-student-container-form-container__button-evalue-project,
+.main-content-container-list__item__results-project__button
 { 
     width: 80vw;
     /* margin: auto; */
@@ -277,6 +279,9 @@ color: var(--text-icons-color);
 
 }
 
+table{
+    overflow: auto;
+}
 
 
 
