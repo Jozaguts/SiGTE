@@ -101,13 +101,22 @@ position: relative;
 .form-assing-student-container-form-container__button__evalueStudent,
 .form-create-student-container-form-container__button_create-team,
 .form-create-student-container-form-container__button_create-project,
-.form-create-student-container-form-container__button_get-evidence-project{ 
+.form-create-student-container-form-container__button_get-evidence-project
+{ 
     width: 80vw;
     /* margin: auto; */
     min-height: 50px;
     border: none;
     border-radius: 5px;
     background-color: var(--accent-color);
+}
+.form-create-student-container-form-container__assign-Team-To-Project{
+    width: 80vw;
+    /* margin: auto; */
+    min-height: 50px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--light-primary-color);
 }
 .is-leader-container{
     display: flex;
@@ -236,9 +245,37 @@ color: var(--primary-text-color);
 .data-student > .input-container > input {
     min-height: 40px !important;
 }
+.projects-container{
+    display: grid;
+    grid-template-columns: auto auto auto ;
+    grid-auto-rows: auto auto auto auto;
+    row-gap: 20px;
+    column-gap: 20px;
+   overflow:auto;
+   padding: 1rem;
 
+    
 
+    
+}
+.projects-container > span {
+   padding: 5px 5px 10px 5px;
+    display: flex;
+    align-content: flex-start;
+    word-wrap: break-word;
+    align-items: center;
+    flex-wrap: nowrap;
+    text-align: left;
+    min-width: 20vw;
+    min-height: 10vh;
+    text-transform: capitalize;
+    border-bottom: 1px dashed var(--divider-color);
+}
+.projects-container > span:hover, span:active, span:focus {
+background-color: var(--accent-color);
+color: var(--text-icons-color);
 
+}
 
 
 

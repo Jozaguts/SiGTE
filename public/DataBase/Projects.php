@@ -1,6 +1,5 @@
 <?php namespace DataBase;
 
-
 require_once 'Conection.php';
 
 class Projects {
@@ -95,7 +94,7 @@ class Projects {
 
         $connection = new Conection;
         
-        //  consulta solo para traer los alumnos que no has sido asignados y al maestro TODOS ESTAN EN LA TABLA USER
+        //  consulta solo para traer los alumnos que estan disponibles y al maestro TODOS ESTAN EN LA TABLA USER
         $query= "INSERT 
                 INTO project 
                 (name_project, start_date_project, end_date_project, status_project, description,file_project, score) values ('$name_project', '$currentDate','$endDate','$status','$comment','$file',$score);";
@@ -123,4 +122,67 @@ class Projects {
 
     
  }
+/* 
+ funcion para el el modulo de asignar equipo a un proyecto 
+ ne realiza una busqueda a base de datos de los proyectos que no tengan equipo asignado
+ para mostrarlos en pantalla */
+
+ public function getProjectsWithOutTeam(){
+
+
+    $connection = new Conection;
+
+    $query = "SELECT id_project, name_project FROM project where project.team_id is null;";
+
+    $response = mysqli_query($connection->Connect(), $query) or die("Error de Consulta" . mysqli_error($connection->Connect()));
+
+    $rowsCoutn = mysqli_num_rows($response);
+
+        if ($rowsCoutn == 0) {
+            $message = "No hay Projectos Disponibles para asignar";
+            echo json_encode($message);
+        }
+        else{
+            $projects = array();
+
+            while ($row = mysqli_fetch_array($response)) {
+                array_push($projects, array(
+                    "id_project" => $row['id_project'],
+                    "name_project" => $row['name_project']
+                ));
+                  
+            }
+            echo json_encode($projects);
+            
+        }
+    }
+
+    public function updateProjectSetTeam($id_team,$id_project){
+
+        (int)$id_project;
+        (int)$id_team;
+
+        $con = new Conection;
+
+        $query = "UPDATE project set team_id = $id_team where id_project = $id_project;";
+
+        $response = mysqli_query($con->Connect(),$query) or die ("Error En la Consulta" . mysqli_error($con->Connect()));
+
+        if ($response == 0) {
+            $message = "No se actualizaron los datos";
+            echo json_encode($message);
+        }else{
+            $message = "Equipo Asignado";
+            echo json_encode($message);
+            session_start();
+            $_SESSION['alert'] = $message;
+
+            mysqli_close($con->Connect());
+        }
+
+
+    }
+
+
+
 }

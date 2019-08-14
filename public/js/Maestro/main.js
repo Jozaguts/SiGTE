@@ -1,5 +1,6 @@
 
 
+    
 // validar si el equipo ya tiene un lider
 function equipoChange(elem){
 
@@ -47,11 +48,4 @@ function equipoChange(elem){
     })
 
 }
-
-// evaluar alumno
-
-
-
-
-
 

@@ -611,6 +611,7 @@ if(e.target.classList.contains('team-icon_teacher')){
     e.stopPropagation();
     $('.main-content-container__list').html(`
     <li class="main-content-container-list__item main-content-container-list__item_teacher">Registrar Equipo</li>
+    <li class="main-content-container-list__item main-content-container-list__item assing-team-of-project">Asignar Equipo A Proyecto</li>
     `);
 }
 if(e.target.classList.contains('project-icon_teacher')){
@@ -660,8 +661,7 @@ if(e.target.classList.contains('form-create-student-container-form-container__bu
        })
        .then(function(jsonResponse){
         $(".container").load("public/views/maestro/SuccessAlert/TeamAlert/SuccessTeam.php", "data", function (response, status, request) {
-              
-                
+  
         });
     })
     .catch((err) => {
@@ -669,6 +669,106 @@ if(e.target.classList.contains('form-create-student-container-form-container__bu
     })
   
 }
+
+// asignar equipo a proyecto
+
+if(e.target.classList.contains('assing-team-of-project')) {
+   
+    $('.container').load("public/views/maestro/AdminProject/AssingTeam.php", "data", function (response, status, request) {
+        this; // dom element
+        
+    });
+
+}
+// asignar equipo a proyecto segunda parte de proceso obtener los projetos disponibles
+$('#selectforGetProjects').change(function (e) { 
+
+    //    let id = e.target.options[e.target.selectedIndex].value <--- id equipo;
+    data={
+        selectforGetProjects: "selectforGetProjects"
+    };
+
+    fetch('public/database/TeamActions.php',{
+        method:'POST', 
+        headers:{'Content-Type':'application/x-www-form-urlencoded'},
+        body:JSON.stringify(data)
+    })
+    .then((value) => {
+     return value.json()
+    })
+    .then((value2) => {
+      console.log(value2);
+      let container = document.querySelector('.projects-container')
+      
+
+      value2.forEach(function (params) {
+            let span = document.createElement('span');
+
+            span.setAttribute('value',params.id_project)
+            span.innerText = params.name_project;
+            span.setAttribute('class','value-project');
+
+            container.appendChild(span);
+
+      })
+            
+  
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+
+});
+
+
+
+
+
+
+if(e.target.classList.contains('value-project')){
+    let button = document.querySelector('.form-create-student-container-form-container__assign-Team-To-Project');
+    button.setAttribute('value', `${e.target.getAttribute('value')}`);
+    button.style.background = "#448AFF";
+    button.style.color = "white";
+    button.innerText = "Equipo seleccionado ¿Guardar Cambios?";
+}
+
+
+// sigo asignando equipo a proyecto
+if(e.target.classList.contains('form-create-student-container-form-container__assign-Team-To-Project')){
+   
+let idProject = e.target.getAttribute('value');
+let select = document.getElementById('selectforGetProjects');
+let idTeam = select.options[select.selectedIndex].value;
+
+data={
+    assingTeamToProject: "true",
+    id_project: idProject,
+    id_team: idTeam
+};
+
+    fetch('public/database/TeamActions.php',{
+        method:'POST',
+        headers:{'Content-Type':'application/x-www-form-urlencoded '},
+        body: JSON.stringify(data)
+    })
+    .then((value) => {
+        return value.json()
+    })
+    .then((result) => {
+        $(".container").load("public/views/maestro/SuccessAlert/ProjectAlert/SuccessProject.php", "data", function (response, status, request) {
+                      
+                        
+        });
+    }).catch((err) => {
+        console.log(err)
+    })
+
+
+}
+
+
+
 
 // registrar proyecto
 
