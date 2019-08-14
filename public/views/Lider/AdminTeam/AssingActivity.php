@@ -1,20 +1,20 @@
 <?php namespace Lider;
 // requiero el auto cargador de clases
 require '../../autoload.php';
-require './../../../Database/Teams.php';
+require './../../../Database/Students.php';
 session_start();
 $user_type = $_SESSION['user_type_id'];
 
 use Components\Header;
-use DataBase\Teams;
+use DataBase\Students;
 
 $header = new Header;
-$teams = new Teams;
+$Students = new Students;
 
 $header->getHeader('Menú');
 
 
-$arrayteams = $teams->getTeams();
+$arrayteams = $Students->getStudents();
 
 echo '<div class="form-create-student-container">
     <form class="form-create-student-container__form">
@@ -28,7 +28,7 @@ echo '<div class="form-create-student-container">
                 <select name="selectforGetProjects" id="selectforGetProjects"> 
                 <option value="false">Elija un Equipo</option> ';
                     foreach ($arrayteams as $teams) {
-                        echo '<option value="'.$teams['id_team'].'">'.$teams['name_team'].' </option>';
+                        echo '<option value="'.$teams['user_id'].'">'.$teams['username'].' </option>';
                     }
                 echo'</select>
                 <small class="small-message">   </small>

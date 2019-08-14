@@ -32,18 +32,19 @@ if(isset($_POST['infoProjectDone'])){
     $project->getInfoProjectDone($id_project);
 }
 
+// crear actividad
+if(isset($_POST['createActivity'])){
+    $data = $_POST;
+    
+   
+    $activity = new Activities;
+
+    $activity->createActivity($data); 
+
+    // $activity->updateAcitivitySetScoreByProject($data);
+}
 
 
-
-
-
-
-// if($action == "Update Project"){
-//     $activity->updateAcitivitySetScoreByProject($data);
-// }
-
-
-// var_dump($_POST);
 
 
 

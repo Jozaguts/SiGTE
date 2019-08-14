@@ -122,7 +122,8 @@ background-color: tomato !important;
 .form-create-student-container-form-container__button_create-project,
 .form-create-student-container-form-container__button_get-evidence-project,
 .form-create-student-container-form-container__button-evalue-project,
-.main-content-container-list__item__results-project__button
+.main-content-container-list__item__results-project__button,
+.form-create-student-container-form-container__button_create-activity-project 
 { 
     width: 80vw;
     /* margin: auto; */

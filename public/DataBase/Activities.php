@@ -146,6 +146,43 @@ class Activities {
         $_SESSION['alert'] = $message;
         echo json_encode($message);
         mysqli_close($con->Connect());
+    }
+
+
+    public function createActivity($data){
+
+       
+        $con = new Conection;
+        $name_activity = $data['name_activity'];
+        $file= $data['file'];
+        $comments =$data['comments'];
+        $status = "A";
+        $idproject= $data['idproject'];
+
+        // $idproject
+
+
+        $query = "INSERT into activity 
+        (name_activity,description_activity, file, status_activity, id_project,id_user,score,evidence_activity) 
+        values ('$name_activity', '$comments','$file','$status', '$idproject' ,null, 0, null);";
+
+
+        $response = mysqli_query($con->Connect(), $query) or die ("Erro de Consulta" . mysqli_error($con->Connect()));
+
+       
+
+        if($response==0){
+            $message = " NO hay datos Modificado";
+            echo json_encode($message);
+            mysqli_close($con->Connect());
+        }else{
+            session_start();
+            $message = "Actividad Creada";
+            $_SESSION['alert']= $message;
+            echo json_encode($message);
+            mysqli_close($con->Connect());
+        }
+
 
 
     }

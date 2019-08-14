@@ -602,6 +602,7 @@ if(e.target.classList.contains('project-icon_teacher')){
     $('.main-content-container__list').html(`
     
     <li class="main-content-container-list__item main-content-container-list__item__register-project  "> Registrar Proyecto</li>
+    <li class="main-content-container-list__item " >Crear Actividades</li>
     <li class="main-content-container-list__item  main-content-container-list__item__advances-project">Avances y Evidencias del Proyecto</li>
     <li class="main-content-container-list__item main-content-container-list__item__evalute-project">Evaluar Proyecto</li>
     <li class="main-content-container-list__item main-content-container-list__item__results-project" id="resultados">Resultados de Proyectos</li>
@@ -1109,7 +1110,7 @@ RESULTADO DEL PROYECTO
 */
 
 if(e.target.classList.contains('main-content-container-list__item__results-project')){
-    $('.container').load("public/views/maestro/AdminProject/ResultProject.php", "data", function (response, status, request) {
+    $('.container').load("public/views/maestro/AdminProject/ResultProject.php", function (response, status, request) {
             
     });
    
@@ -1175,6 +1176,13 @@ $('#projectResult').change(function (e) {
 });
    
 
+    if(e.target.innerText == "Crear Actividades"){
+      $('.container').load("public/views/maestro/AdminProject/CreateActivity.php", function (response, status, request) {
+          this; // dom element
+          
+      });
+        e.preventDefault();
+    }
 
 
 

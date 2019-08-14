@@ -112,7 +112,7 @@ class Students {
 
         $connection = new Conection;
         
-        // consulta solo para traer los alumnos que no has sido asignados y al maestro TODOS ESTAN EN LA TABLA USER
+       
         $query="SELECT name_activity, status_activity from activity where id_user = $user_id;";
     //    se ejecuta la consulta si falla se mata el proceso
         $response = mysqli_query($connection->Connect(), $query) or die("Error de Consulta" . mysqli_error($connection->Connect()));
@@ -133,7 +133,7 @@ class Students {
 
         $connection = new Conection;
         
-        // consulta solo para traer los alumnos que no has sido asignados y al maestro TODOS ESTAN EN LA TABLA USER
+  
         $query=
         "SELECT DISTINCT username, user_id
         from `user`, activity
@@ -211,47 +211,8 @@ class Students {
         }
         mysqli_close($connection->Connect());
 
-    //     // var_dump($user_id);
+    
 
-    //     $connection = new Conection;
-        
-    //     // consualta para traer las actividades asignadas a un cierto ID
-    //     $query=
-    //     "SELECT DISTINCT name_activity, status_activity, score,id_activity, id_user
-    //     from activity
-    //     where id_user = $idStudent;";
-    //     // WHERE user_id = $user_id";
-   
-    // //    se ejecuta la consulta si falla se mata el proceso
-    //     $response = mysqli_query($connection->Connect(), $query) or die("Error de Consulta" . mysqli_error($connection->Connect()));
-    //     // obtengo el numero de columnas de la respuesta que da la base de datos
-    //     $rowsCoutn = mysqli_num_rows($response);
-
-     
-
-    //     if ($rowsCoutn == 0) {
-    //         echo "Alumno sin Actividades";
-    //     }else{
-    //         $activities = array();
-    //          while ($row = mysqli_fetch_array($response)) {
-
-    //             array_push($activities, array(
-    //                 "name_activity" => $row['name_activity'],
-    //                 "id_activity" => $row['id_activity'],
-    //                 "id_user" => $row['id_user'],
-    //                 "status_activity" => $row['status_activity'],
-    //                 "score" => $row['score']  
-    //             ));
-    //         }
-    //     //  si quiero regesarlo a JS
-    //         $jsonRespose = json_encode($activities);
-    //         echo $jsonRespose;
-    //         // me brinco el paso de js y lo pinto mandanlo directamet al archivo que lo necesita
-            
-    //         // return $activities; 
-
-           
-    //     }
     }
     function SetScoreStudent($array){
 
@@ -375,6 +336,9 @@ class Students {
 
 
     }
+
+ 
+    
 
 
 
