@@ -123,7 +123,8 @@ background-color: tomato !important;
 .form-create-student-container-form-container__button_get-evidence-project,
 .form-create-student-container-form-container__button-evalue-project,
 .main-content-container-list__item__results-project__button,
-.form-create-student-container-form-container__button_create-activity-project 
+.form-create-student-container-form-container__button_create-activity-project,
+.form-create-student-container-form-container__assign-Activity-To-Parner 
 { 
     width: 80vw;
     /* margin: auto; */

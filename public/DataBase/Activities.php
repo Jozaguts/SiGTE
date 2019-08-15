@@ -10,7 +10,7 @@ class Activities {
     
 
         $connection = new Conection;
-        
+ 
         // consulta solo para traer los alumnos que no has sido asignados y al maestro TODOS ESTAN EN LA TABLA USER
         $query="SELECT id_activity, name_activity, status_activity from activity where  id_project = $idProject;";
     //    se ejecuta la consulta si falla se mata el proceso
@@ -50,6 +50,9 @@ class Activities {
 
 
     }
+
+
+
     public function getinfoActivity($idActivity, $idProject){
 
      
@@ -184,6 +187,35 @@ class Activities {
         }
 
 
+        
+    }
+    public function activitiesByTeam($id_team){
+
+        $con = new Conection();
+
+        $query="SELECT id_activity, name_activity, status_activity from activity as a, project as p where p.id_project = a.id_project  and id_activity = $id_team ";
+
+        $response = mysqli_query($con->Connect(), $query) or die ("Error en la consulta". mysqli_error($con->Connect()));
+        $rowsCoutn = mysqli_num_rows($response);
+
+        if($rowsCoutn == 0){
+            $message = " Equipo sin Actividades";
+            echo json_encode($message);
+            mysqli_close($con->Connect());
+        }else{
+            $activities = array();
+             while ($row = mysqli_fetch_array($response)) {
+
+                array_push($activities, array(
+                    "id_activity" => $row['id_activity'],
+                    "name_activity" => $row['name_activity'],
+                    "status_activity" => $row['status_activity']
+                ));
+            }
+            // $jsonRespose = json_encode($activities);
+            return  $activities;
+        }
+        
 
     }
 

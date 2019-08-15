@@ -10,7 +10,7 @@ class Students {
         $connection = new Conection;
         
         // consulta solo para traer los alumnos que no has sido asignados y al maestro TODOS ESTAN EN LA TABLA USER
-        $query="SELECT name, user_id, paternal_name, maternal_name, user_type_id,username, id_team from user where user_type_id != 1 ;";
+        $query="SELECT name, user_id, paternal_name, maternal_name, user_type_id,username, id_team from user where user_type_id != 1 and id_team is null;";
     //    se ejecuta la consulta si falla se mata el proceso
         $response = mysqli_query($connection->Connect(), $query) or die("Error de Consulta" . mysqli_error($connection->Connect()));
         // obtengo el numero de columnas de la respuesta que da la base de datos
@@ -47,6 +47,47 @@ class Students {
         }
         mysqli_close($connection->Connect());
  }
+ function getAllStudentsForEdit() {
+    $connection = new Conection;
+    
+    // consulta solo para traer los alumnos que no has sido asignados y al maestro TODOS ESTAN EN LA TABLA USER
+    $query="SELECT name, user_id, paternal_name, maternal_name, user_type_id,username, id_team from user where user_type_id != 1;";
+//    se ejecuta la consulta si falla se mata el proceso
+    $response = mysqli_query($connection->Connect(), $query) or die("Error de Consulta" . mysqli_error($connection->Connect()));
+    // obtengo el numero de columnas de la respuesta que da la base de datos
+    $rowsCoutn = mysqli_num_rows($response);
+
+ 
+
+    if ($rowsCoutn == 0) {
+        return json_encode(" No hay alumnos resistrados");
+    }else{
+        $students = array();
+         while ($row = mysqli_fetch_array($response)) {
+
+            array_push($students, array(
+                "name" => $row['name'],
+                "paternal_name" => $row['paternal_name'],
+                 "maternal_name" => $row['maternal_name'],
+                 "username" => $row['username'],
+                 "user_id" => $row['user_id'],
+                 "id_team"=> $row['id_team'],
+                 "user_type_id" => $row['user_type_id']
+
+            ));
+    
+           
+
+        }
+    //  si quiero regesarlo a JS
+        $jsonRespose = json_encode($students);
+        // me brinco el paso de js y lo pinto mandanlo directamet al archivo que lo necesita
+        return $students; 
+
+       
+    }
+    mysqli_close($connection->Connect());
+}
 
  function assingStudent($data) {
 
@@ -61,8 +102,7 @@ class Students {
     $boolean = (bool)$is_leader;
 
     $connection = new Conection;
-    
-    //  consulta solo para traer los alumnos que no has sido asignados y al maestro TODOS ESTAN EN LA TABLA USER
+   
     $query= "INSERT INTO student_team (id_user, id_team,is_leader) VALUES($id_user,$id_team,$boolean)";
 //    se ejecuta la consulta si falla se mata el proceso
     $response = mysqli_query($connection->Connect(), $query) or die("Error de Consulta" . mysqli_error($connection->Connect()));
@@ -75,17 +115,31 @@ class Students {
         echo json_encode($res); 
     }else{
        
-        session_start();
-        $_SESSION['alert'] =  'Alumno Asignado Correctamente';
-        $res = "Alumno Asignado Correctamente";
-
-        echo json_encode($res); 
+       
 
         mysqli_close($connection->Connect());
+
+
+
         $updateIdTeam = $this->updateIdTeam($id_team,$id_user);
+         $updateIdTeam = $this->disscoutnInTeam($id_team);
+         session_start();
+         
+         $_SESSION['alert'] =  'Alumno Asignado Correctamente';
+         $res = "Alumno Asignado Correctamente";
+ 
+         echo json_encode($res); 
+
+         if($boolean ){
+            $updateIdLeaderInTeamTable = $this->updateIdLeaderInTeamTable($id_user,$id_team);
+            $UpdateTableUserTypeUser = $this->UpdateTableUserTypeUser($id_user);
+         }
+        
+         
 }
  
 }
+// se actualizae el campo id_Team en  la tabla usuarios
     function updateIdTeam($id_team,$id_user){
 
         $connection = new Conection;
@@ -337,6 +391,151 @@ class Students {
 
     }
 
+    function getStudentsByTeam($idTeam) {
+        $connection = new Conection;
+        
+        // consulta solo para traer los alumnos que no has sido asignados y al maestro TODOS ESTAN EN LA TABLA USER
+        $query="SELECT name, user_id, paternal_name, maternal_name, user_type_id,username, id_team from user where user_type_id != 1 and id_team = '$idTeam';";
+    //    se ejecuta la consulta si falla se mata el proceso
+        $response = mysqli_query($connection->Connect(), $query) or die("Error de Consulta" . mysqli_error($connection->Connect()));
+        // obtengo el numero de columnas de la respuesta que da la base de datos
+        $rowsCoutn = mysqli_num_rows($response);
+
+     
+
+        if ($rowsCoutn == 0) {
+            return json_encode(" No hay alumnos resistrados");
+        }else{
+            $students = array();
+             while ($row = mysqli_fetch_array($response)) {
+
+                array_push($students, array(
+                    "name" => $row['name'],
+                    "paternal_name" => $row['paternal_name'],
+                     "maternal_name" => $row['maternal_name'],
+                     "username" => $row['username'],
+                     "user_id" => $row['user_id'],
+                     "id_team"=> $row['id_team'],
+                     "user_type_id" => $row['user_type_id']
+
+                ));
+        
+               
+
+            }
+        //  si quiero regesarlo a JS
+            $jsonRespose = json_encode($students);
+            // me brinco el paso de js y lo pinto mandanlo directamet al archivo que lo necesita
+            return $students; 
+
+           
+        }
+        mysqli_close($connection->Connect());
+ }
+
+    // se descuenta en la tabla team la cantidad de 1 en el campo max_student
+
+    public function disscoutnInTeam($idteam) {
+
+        $connection = new Conection;
+        
+        // consulta solo para traer los alumnos que no has sido asignados y al maestro TODOS ESTAN EN LA TABLA USER
+        $query="update team as t set max_students =  max_students - 1 
+        where id_team = $idteam;";
+
+    //    se ejecuta la consulta si falla se mata el proceso
+        $response = mysqli_query($connection->Connect(), $query) or die("Error de Consulta" . mysqli_error($connection->Connect()));
+        // obtengo el numero de columnas de la respuesta que da la base de datos
+        // $rowsCoutn = mysqli_num_rows($response);
+
+        if($response ==0){
+            $message = "No Se desconto En Max estudent";
+            session_start();
+            $_SESSION['alert']=$message;
+
+            echo json_encode($message);
+
+            mysqli_close($connection->Connect());
+        }else{
+            // $message = "Se desconto En Max estudent";
+            // session_start();
+            // $_SESSION['alert']=$message;
+
+            // echo json_encode($message);
+
+            mysqli_close($connection->Connect());
+        }
+        
+
+
+
+
+
+    }
+    public function updateIdLeaderInTeamTable($idLeader, $id_team) {
+
+        $connection = new Conection;
+        
+        // consulta solo para traer los alumnos que no has sido asignados y al maestro TODOS ESTAN EN LA TABLA USER
+        $query="update team as t set id_leader =  $idLeader where id_team = $id_team";
+
+    //    se ejecuta la consulta si falla se mata el proceso
+        $response = mysqli_query($connection->Connect(), $query) or die("Error de Consulta" . mysqli_error($connection->Connect()));
+        // obtengo el numero de columnas de la respuesta que da la base de datos
+        // $rowsCoutn = mysqli_num_rows($response);
+
+        if($response ==0){
+            $message = "No se pudo actualizar Team  (Id Leader)";
+            session_start();
+            $_SESSION['alert']=$message;
+
+            echo json_encode($message);
+
+            mysqli_close($connection->Connect());
+        }else{
+            // $message = "Se desconto En Max estudent";
+            // session_start();
+            // $_SESSION['alert']=$message;
+
+            // echo json_encode($message);
+
+            mysqli_close($connection->Connect());
+        }
+        
+    }
+    public function UpdateTableUserTypeUser($idLeader) {
+
+        $connection = new Conection;
+       
+        $type= 2; // <- tipo de usuario LIDER
+        // consulta solo para traer los alumnos que no has sido asignados y al maestro TODOS ESTAN EN LA TABLA USER
+        $query="update user as u set u.user_type_id = $type where user_id = $idLeader";
+
+    //    se ejecuta la consulta si falla se mata el proceso
+        $response = mysqli_query($connection->Connect(), $query) or die("Error de Consulta" . mysqli_error($connection->Connect()));
+        // obtengo el numero de columnas de la respuesta que da la base de datos
+        // $rowsCoutn = mysqli_num_rows($response);
+
+        if($response ==0){
+            $message = "No se pudo actualizar Team  (Id Leader)";
+            session_start();
+            $_SESSION['alert']=$message;
+
+            echo json_encode($message);
+
+            mysqli_close($connection->Connect());
+        }else{
+            // $message = "Se desconto En Max estudent";
+            // session_start();
+            // $_SESSION['alert']=$message;
+
+            // echo json_encode($message);
+
+            mysqli_close($connection->Connect());
+        }
+        
+    }
+    
  
     
 

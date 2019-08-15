@@ -299,7 +299,7 @@ document.getElementsByTagName('head')[0].appendChild(linkElement);
             data.leader= $("input[name=leader]:checked").val()==undefined? data.leader='false':data.leader= $("input[name=leader]:checked").val();
        
             // data.request= 'assingStudent';
-
+            console.log(data)
             fetch('public/DataBase/AssingStudent.php',{
                 method: 'POST',
                 headers: {'Content-Type':'application/x-www-form-urlencoded'}, 
@@ -681,7 +681,7 @@ $('#selectforGetProjects').change(function (e) {
      return value.json()
     })
     .then((value2) => {
-      console.log(value2);
+   
       let container = document.querySelector('.projects-container')
       
 
@@ -730,7 +730,7 @@ data={
     id_project: idProject,
     id_team: idTeam
 };
-
+console.log(data);
     fetch('public/database/TeamActions.php',{
         method:'POST',
         headers:{'Content-Type':'application/x-www-form-urlencoded '},

@@ -81,11 +81,49 @@ if(e.target.classList.contains('form-create-student-container-form-container__bu
             })
         
         }
+}
+
+// boton para aceptar para asignar tarea a miembro
+
+if(e.target.classList.contains('form-create-student-container-form-container__assign-Activity-To-Parner')){
+    let  getParnerTeamSelect,  getParnerTeamOption,
+        getActivityTeamSelect, getActivityTeamoption,
+        data = {};
 
 
+        getParnerTeamSelect = document.getElementById('getParnerTeam')
+        getParnerTeamOption = getParnerTeamSelect.options[getParnerTeamSelect.selectedIndex].value
+
+        
+        getActivityTeamSelect = document.getElementById('getActivityTeam')
+        getActivityTeamoption = getActivityTeamSelect.options[getActivityTeamSelect.selectedIndex].value        
+        
+        // validacion  no falsos
+
+        if(getParnerTeamOption == "false" || getActivityTeamoption == "false"){
+            $('.projects-container').text('No puede Ingresar Campos Vacios');
+        }else{
+            $('.projects-container').text('');
 
 
+            // prepararo datos
+            data.assignActivity = "true";
 
+            data.id_activity = getActivityTeamoption;
+            data.id_student = getParnerTeamOption;
+
+            console.log(data)
+
+            // envio datos
+
+            fetch('public/database/ActivityActions.php',{
+                method: "POST",
+                headers: {'Content-Type':'application/x-www-form-urlencoded'}, 
+                body: JSON.stringify(data)
+            })
+
+
+        }
 
 }
 

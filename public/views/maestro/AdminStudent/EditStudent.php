@@ -17,7 +17,8 @@ $header->getHeader('Menú');
 
 // obtengo los estudiantes que no tengan equipo asignado
 $students = new Students;
-$arrayResponse= $students->getStudents();
+$arrayResponse= $students->getAllStudentsForEdit();
+// var_dump($arrayResponse);
 
 // // obtengo los proyectos
 // $projects = new Projects;

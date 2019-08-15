@@ -12,6 +12,6 @@ $name_team = $_POST['name_team'];
 $max_students = $_POST['max_students'];
 
 
-$teams->setTeam($cod_team,$name_team,$max_students);
+$teams->setTeam($name_team,$cod_team,$max_students);
  
 

@@ -136,7 +136,7 @@ class Projects {
 
     $connection = new Conection;
 
-    $query = "SELECT id_project, name_project FROM project where project.team_id is null;";
+    $query = "SELECT id_project, name_project FROM project ;";
 
     $response = mysqli_query($connection->Connect(), $query) or die("Error de Consulta" . mysqli_error($connection->Connect()));
 
@@ -170,7 +170,7 @@ class Projects {
 
         $con = new Conection;
 
-        $query = "UPDATE project set team_id = $id_team where id_project = $id_project;";
+        $query = "INSERT INTO project_team (id_team, id_project) values ($id_team, $id_project);";
 
         $response = mysqli_query($con->Connect(),$query) or die ("Error En la Consulta" . mysqli_error($con->Connect()));
 
