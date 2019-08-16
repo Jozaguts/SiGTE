@@ -228,10 +228,7 @@ class Projects {
 
 
         $query = "SELECT p.name_project, p.score, p.end_date_project, u.username, t.name_team, p.final_file_project
-        from project as p 
-        inner join team as t
-        on 
-        p.team_id = t.id_team
+        from project as p, team as t
         inner join
         user as u 
         on 
@@ -272,6 +269,40 @@ class Projects {
 
     }
 
+    public function showTeamsByProject($idProject) {
+
+        $con = new Conection;
+        int($idProject);
+        $query= "SELECT distinct t.id_team, t.name_team
+        from team as t
+        inner join project_team as tp
+        on tp.id_project = $idProject";
+
+        $resposen = mysqli_query($con->Connect(), $query) or die ("Error en consulta". mysqli_error($con->Connect()));
+        $rowsCoutn = mysqli_num_rows($resposen);
 
 
+        if($rowsCoutn== 0 ){
+
+            $message ="No hay Información";
+            echo json_encode($message);
+        }else{
+            $teams = array();
+
+            while ($row = mysqli_fetch_array($resposen)) {
+                array_push($teams, array(
+                    "id_team" => $row['id_team'],
+                    "name_team" => $row['name_team']
+                ));
+        }
+
+        return $teams;
+        mysqli_close($con->Connect());
+
+        
+    }
+
+
+
+    }
 }

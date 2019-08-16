@@ -12,7 +12,29 @@ $activity = new Activities;
 
 if(isset($_POST['assignActivity'])){
 
-    // $activity->
+    $id_activity = $_POST['id_activity'];
+    $id_student = $_POST['id_student'];
+    $activity->assignActivity($id_student,$id_activity);
 
 }
+
+if(isset($_POST['getInfoActivity'])){
+
+    $id_activity = $_POST['id'];
+    $activity->getInfoActivityByIdActivity($id_activity);
+
+}
+
+
+if(isset($_POST['validateActivity'])){
+
+    $id_activity = $_POST['id'];
+    $value = $_POST['value'];
+
+    $activity->validateActivity($id_activity,$value);
+
+}
+
+
+
 

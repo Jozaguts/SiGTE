@@ -3,6 +3,7 @@
 require ('../autoload.php');
 session_start();
 $user_type = $_SESSION['user_type_id'];
+
 // var_dump($user_type);
 // uso mis clases
 use Components\Footer;

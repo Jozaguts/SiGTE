@@ -24,21 +24,7 @@ $arrayResponse= $students->getStudents();
 $teams = new Teams;
 $arrayTeams = $teams->getTeams();
 
-// require './../../../Database/Projects.php';
-// use DataBase\Projects;
-// obtengo los proyectos
-// $projects = new Projects;
-// $arrayProjects = $projects->getProjects();
-// <div class="input-container">
-// <small class="small-name">   </small>
-// <select name="proyecto" id="proyecto" class="" > 
-// <option value="false">Elija un Proyecto</option> ';
-//     foreach ($arrayProjects as $project) {
-//         echo '<option value="'.$project['id_project'].'">'.$project['name_project'].' </option>';
-//     }
-// echo'</select>
-// <small class="small-message">   </small>
-// </div>
+
 
 
 echo '<div class="form-create-student-container">

@@ -48,6 +48,7 @@ if ($stmt = $conected->prepare("SELECT * FROM user WHERE username=? and password
         $_SESSION['maternal_name']  = $maternal_name;
         $_SESSION['email']  = $email;
         $_SESSION['id_team']  = $id_team;
+        $_SESSION['user_id']  = $user_id;
         
         
         echo json_encode($response); 

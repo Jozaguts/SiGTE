@@ -13,7 +13,7 @@ class  MainComponent{
                 $generateActivities = $this->generateActivities($listActivitys);
                 break;
             case 2:
-            $listActivitys = array( 0=> 'Asignar Actividades');
+            $listActivitys = array( 0=> 'Asignar Actividades','Revisar Actividades');
             $generateActivities= $this->generateActivities($listActivitys);
                 break;
             case 3:

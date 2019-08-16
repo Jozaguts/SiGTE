@@ -603,7 +603,7 @@ if(e.target.classList.contains('project-icon_teacher')){
     
     <li class="main-content-container-list__item main-content-container-list__item__register-project  "> Registrar Proyecto</li>
     <li class="main-content-container-list__item " >Crear Actividades</li>
-    <li class="main-content-container-list__item  main-content-container-list__item__advances-project">Avances y Evidencias del Proyecto</li>
+
     <li class="main-content-container-list__item main-content-container-list__item__evalute-project">Evaluar Proyecto</li>
     <li class="main-content-container-list__item main-content-container-list__item__results-project" id="resultados">Resultados de Proyectos</li>
     `);
@@ -935,7 +935,7 @@ if(e.target.classList.contains('main-content-container-list__item__register-proj
             }
     
          if(Object.keys(advanceofactivitiesProject).length == 2){
-
+            console.log(advanceofactivitiesProject);
              fetch('public/database/AdvanceEvidenceInfo.php',{
                  method: "POST",
                   headers: {'Content-Type':'application/x-www-form-urlencoded'}, 
@@ -1179,11 +1179,29 @@ $('#projectResult').change(function (e) {
     if(e.target.innerText == "Crear Actividades"){
       $('.container').load("public/views/maestro/AdminProject/CreateActivity.php", function (response, status, request) {
           this; // dom element
-          
-      });
+
+        });
         e.preventDefault();
     }
 
+  
+    $('#project').change(function (e) { 
+
+
+       let id = e.target.options[e.target.selectedIndex].value;
+       console.log(id);
+
+        data={
+            getTeamsByProject: "true",
+            id:id
+        }
+
+    fetch('public/')
+
+
+        e.preventDefault();
+        
+    });
 
 
 
@@ -1248,3 +1266,5 @@ document.addEventListener('submit',function(e){
     e.preventDefault();
     e.stopPropagation();
 });
+
+

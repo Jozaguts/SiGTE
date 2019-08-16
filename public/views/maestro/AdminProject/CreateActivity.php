@@ -13,6 +13,7 @@ $header->getHeader('Menú');
 $project = new Projects;
 
 $arrayProjects = $project->getProjects();
+// $arrayTeams = $project->showTeamsByProject();
 
 
 
@@ -33,6 +34,15 @@ echo '<div class="form-create-student-container">
                 foreach ($arrayProjects as $file =>$key) {
                     echo '<option value="'.$key['id_project'].'">'.$key['name_project'].' </option>';
                 }
+        echo'</select>
+            <small class="small-message">   </small>
+            </div>
+            <div class="input-container">
+            <small class="small-name">   </small>
+            <select name="project" id="project" class="" >
+
+            <option value="false" >Elija un Equipo</option> ';
+
         echo'</select>
             <small class="small-message">   </small>
         </div>

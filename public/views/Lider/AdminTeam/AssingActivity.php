@@ -6,7 +6,6 @@ require './../../../Database/Activities.php';
 session_start();
 $user_type = $_SESSION['user_type_id'];
 $idTeam = $_SESSION['id_team'];
-var_dump($idTeam);
 
 
 use Components\Header;
@@ -20,9 +19,11 @@ $Activities = new Activities;
 $header->getHeader('Menú');
 
 
-$arrayteams = $Students->getStudentsByTeam($idTeam);
 
 $arrayActivities = $Activities->activitiesByTeam($idTeam);
+
+
+$arrayteams = $Students->getStudentsByTeam($idTeam);
 
 
 
@@ -55,22 +56,12 @@ echo '<div class="form-create-student-container">
         </div>
 
             <div class="projects-container">
-            
-            
-            
-            
+
             </div>
-
-            
-
-
-         
-           
-
 
         </div>
 
-     
+
         
         <div class="form-create-student-container-form-button-container">
             <button class="form-create-student-container-form-container__assign-Activity-To-Parner">Aceptar</button>

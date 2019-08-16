@@ -124,7 +124,9 @@ background-color: tomato !important;
 .form-create-student-container-form-container__button-evalue-project,
 .main-content-container-list__item__results-project__button,
 .form-create-student-container-form-container__button_create-activity-project,
-.form-create-student-container-form-container__assign-Activity-To-Parner 
+.form-create-student-container-form-container__assign-Activity-To-Parner,
+.btn-send,
+.form-assing-student-container__send_valitation
 { 
     width: 80vw;
     /* margin: auto; */
@@ -303,6 +305,49 @@ color: var(--text-icons-color);
 table{
     overflow: auto;
 }
+.activities-container{
+    overflow: auto;
+    display: flex;
+    width: 80vw;
+    justify-content: flex-start;
+}
+.activities-container > ul{
+    display: block;
+    width: 100%;
+}
+.activities-container >ul > p {
+    padding: .5rem 0 1rem 0;
+}
+.activities-container ul > li, p {
+    color: var(--secondary-text-color);
+
+}
+.activities-container > ul > li > span{
+    color: var(--primary-text-color);
+}
+.activities-container > ul > p > span{
+
+    color: var(--primary-text-color);
+
+}
+#evidence{
+    border: none;
+    background-color: none;
+}
+.container-ul{
+    overflow: visible;
+    display: flex;
+   
+    align-items: center;
+    width: 80vw;
+    justify-content: space-around;
+}
+.data-activity{
+    overflow: visible;
+}
+
+
+
 
 
 
